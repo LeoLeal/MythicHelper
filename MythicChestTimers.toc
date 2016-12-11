@@ -1,0 +1,15 @@
+## Interface: 70100
+## Version: 1.0.0
+## Title: MythicChestTimers
+## Author: LeoLeal@Azralon
+## Notes: Adds chests timer for Mythic+ Dungeons
+## SavedVariables: MythicChestTimersDB
+## OptionalDeps: Ace3
+## X-Embeds: Ace3
+
+embeds.xml
+
+Locales\Locales.xml
+
+Core.lua
+ChestTimer.lua
