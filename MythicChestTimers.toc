@@ -1,5 +1,5 @@
-## Interface: 70100
-## Version: 1.0.0
+## Interface: 71500
+## Version: 1.0.1
 ## Title: MythicChestTimers
 ## Author: LeoLeal@Azralon
 ## Notes: Adds chests timer for Mythic+ Dungeons
