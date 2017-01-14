@@ -5,3 +5,6 @@ end
 
 L["Chests"] = "Baús"
 L["NoChests"] = "Nenhum baú extra"
+L["NoChests_KeyDepleted"] = "Nenhum baú extra (Chave esgotada)"
+L["Rewards"] = "Recompensas"
+L["No_Loot"] = "Sem saque"
