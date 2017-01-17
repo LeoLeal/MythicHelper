@@ -1,5 +1,5 @@
 MythicChestTimersCMTimer = {}
-LOOT_HEIGHT = 20;
+LOOT_HEIGHT = 18;
 LOOT_ILVL = { 840,845,845,850,850,855,855,860,860,865,870,870,870,870,870,870 };
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicChestTimersCMTimer:Init()
@@ -10,9 +10,9 @@ function MythicChestTimersCMTimer:Init()
     TimersPosition.relativePoint = "TOPLEFT";
 
     LootPosition = {};
-    LootPosition.left = 10;
-    LootPosition.bottom = (LOOT_HEIGHT-25);
-    LootPosition.relativePoint = "BOTTOMLEFT";
+    LootPosition.right = -29;
+    LootPosition.top = -59;
+    LootPosition.relativePoint = "TOPRIGHT";
 
     MythicChestTimersCMTimer.isCompleted = false;
     MythicChestTimersCMTimer.started = false;
@@ -20,16 +20,14 @@ function MythicChestTimersCMTimer:Init()
     MythicChestTimersCMTimer.frames = {};
     MythicChestTimersCMTimer.timerStarted = false;
 
-    
     MythicChestTimersCMTimer.frame = CreateFrame("Frame", "CmTimer", ScenarioChallengeModeBlock);
     MythicChestTimersCMTimer.frame:SetPoint(TimersPosition.relativePoint,TimersPosition.left,TimersPosition.top);
     MythicChestTimersCMTimer.frame:EnableMouse(false);
     MythicChestTimersCMTimer.frame:SetWidth(190);
     MythicChestTimersCMTimer.frame:SetHeight(18);
 
-    --LOOT FRAME AINDA DESENVOLVENDO
-    MythicChestTimersCMTimer.lootFrame = CreateFrame("Frame", "LootTimer", ScenarioBlocksFrame);
-    MythicChestTimersCMTimer.lootFrame:Hide();
+    MythicChestTimersCMTimer.lootFrame = CreateFrame("Frame", "LootTimer", ScenarioChallengeModeBlock);
+    MythicChestTimersCMTimer.lootFrame:SetPoint(LootPosition.relativePoint,LootPosition.right,LootPosition.top);
     MythicChestTimersCMTimer.lootFrame:EnableMouse(false);
     MythicChestTimersCMTimer.lootFrame:SetWidth(200);
     MythicChestTimersCMTimer.lootFrame:SetHeight(LOOT_HEIGHT);
@@ -43,14 +41,11 @@ end
 function MythicChestTimersCMTimer:OnComplete()
     MythicChestTimersCMTimer.isCompleted = true;
     MythicChestTimersCMTimer.frame:Hide();
-
-    MythicChestTimersDB.currentRun = {}
+    MythicChestTimersCMTimer.lootFrame:Hide();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicChestTimersCMTimer:OnStart()
-    MythicChestTimersDB.currentRun = {}
-    
     MythicChestTimersCMTimer.isCompleted = false;
     MythicChestTimersCMTimer.started = true;
     MythicChestTimersCMTimer.reset = false;
@@ -61,11 +56,10 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicChestTimersCMTimer:OnReset()
     MythicChestTimersCMTimer.frame:Hide();
+    MythicChestTimersCMTimer.lootFrame:Hide();
     MythicChestTimersCMTimer.isCompleted = false;
     MythicChestTimersCMTimer.started = false;
     MythicChestTimersCMTimer.reset = true;
-
-    MythicChestTimersDB.currentRun = {}
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -80,11 +74,11 @@ function MythicChestTimersCMTimer:ReStart()
     end
 
     MythicChestTimersCMTimer.frame:Hide();
+    MythicChestTimersCMTimer.lootFrame:Hide();
     MythicChestTimersCMTimer.reset = false
     MythicChestTimersCMTimer.timerStarted = false
     MythicChestTimersCMTimer.started = false
     MythicChestTimersCMTimer.isCompleted = false
-    MythicChestTimersDB.currentRun = {}
     return
 end
 
@@ -93,6 +87,7 @@ function MythicChestTimersCMTimer:Draw()
     local _, _, difficulty, _, _, _, _, currentZoneID = GetInstanceInfo();
     if difficulty ~= 8 then
         MythicChestTimersCMTimer.frame:Hide();
+        MythicChestTimersCMTimer.lootFrame:Hide();
         return
     end
 
@@ -100,6 +95,7 @@ function MythicChestTimersCMTimer:Draw()
         MythicChestTimers:CancelCMTimer()
         MythicChestTimersCMTimer.timerStarted = false
         MythicChestTimersCMTimer.frame:Hide();
+        MythicChestTimersCMTimer.lootFrame:Hide();
         return
     end
 
@@ -107,8 +103,9 @@ function MythicChestTimersCMTimer:Draw()
         MythicChestTimersCMTimer.reset = false
         MythicChestTimersCMTimer.timerStarted = false
         MythicChestTimersCMTimer.started = false
-        MythicChestTimers:CancelCMTimer()
+        MythicChestTimers:CancelCMTimer();
         MythicChestTimersCMTimer.frame:Hide();
+        MythicChestTimersCMTimer.lootFrame:Hide();
         return
     end
 
@@ -121,10 +118,7 @@ function MythicChestTimersCMTimer:Draw()
 
     if not MythicChestTimersCMTimer.isCompleted then
         MythicChestTimersCMTimer.frame:Show();
-    end
-
-    if not MythicChestTimersDB.currentRun.times  then
-        MythicChestTimersDB.currentRun.times = {}
+        MythicChestTimersCMTimer.lootFrame:Show();
     end
     
     local cmLevel, affixes, empowered = C_ChallengeMode.GetActiveKeystoneInfo();
@@ -151,22 +145,18 @@ function MythicChestTimersCMTimer:Draw()
         timeLeft1 = 0;
     end
 
+    -- loot frame
     if not MythicChestTimersCMTimer.frames.chestloot then
         local label = CreateFrame("Frame", nil, MythicChestTimersCMTimer.lootFrame);
         label:SetAllPoints()
         label.text = label:CreateFontString(nil, "BACKGROUND", "GameFontHighlight");
-        label.text:SetPoint("TOPLEFT", 0,0);
+        label.text:SetPoint("TOPRIGHT", 0,0);
+        label.text:SetJustifyH("RIGHT");
         label.text:SetFontObject("GameFontHighlight");
 
         MythicChestTimersCMTimer.frames.chestloot = {
             labelFrame = label
         }
-        
-        if not ScenarioChallengeModeBlock.StartedDepleted then
-            MythicChestTimersCMTimer.lootFrame:Show();
-            ScenarioBlocksFrame:SetHeight(ScenarioBlocksFrame:GetHeight()+20);
-            MythicChestTimersCMTimer.lootFrame:SetPoint(LootPosition.relativePoint,LootPosition.left,LootPosition.bottom);
-        end
     end
 
     -- -- Chest Timers
@@ -184,7 +174,8 @@ function MythicChestTimersCMTimer:Draw()
         }
     end
 
-    if ScenarioChallengeModeBlock.StartedDepleted then
+    local lootLevel = LOOT_ILVL[dungeonLevel];
+    if ScenarioChallengeModeBlock.wasDepleted then
         MythicChestTimersCMTimer.frames.chesttimer.labelFrame.text:SetText(MythicChestTimers.L["No_Loot"]);
         MythicChestTimersCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontDisable");
         MythicChestTimersCMTimer.frames.chestloot.labelFrame:Hide();
@@ -192,34 +183,34 @@ function MythicChestTimersCMTimer:Draw()
         MythicChestTimersCMTimer.frames.chesttimer.labelFrame.text:SetText("3 "..MythicChestTimers.L["Chests"]..": "..MythicChestTimersCMTimer:FormatSeconds(timeLeft3));
         MythicChestTimersCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
         MythicChestTimersCMTimer.frames.chestloot.labelFrame:Show();
-        if (LOOT_ILVL[dungeonLevel+2] == LOOT_ILVL[dungeonLevel] and LOOT_ILVL[dungeonLevel+1] == LOOT_ILVL[dungeonLevel]) or (not LOOT_ILVL[dungeonLevel+2] and not LOOT_ILVL[dungeonLevel+1]) then
-            MythicChestTimersCMTimer.frames.chestloot.labelFrame.text:SetText(MythicChestTimers.L["Rewards"] .. ": |cFFAAAAAA6x|cFF00FF00" .. LOOT_ILVL[dungeonLevel] .. "+");
-        elseif LOOT_ILVL[dungeonLevel+2] == LOOT_ILVL[dungeonLevel+1] or not LOOT_ILVL[dungeonLevel+2] then
-            MythicChestTimersCMTimer.frames.chestloot.labelFrame.text:SetText(MythicChestTimers.L["Rewards"] .. ": |cFFAAAAAA4x|cFF00FF00" .. LOOT_ILVL[dungeonLevel+1] .. "+|cFFAAAAAA, 2x|cFF00FF00" .. LOOT_ILVL[dungeonLevel] .. "+");
-        elseif LOOT_ILVL[dungeonLevel+1] == LOOT_ILVL[dungeonLevel] or not LOOT_ILVL[dungeonLevel+1] then
-            MythicChestTimersCMTimer.frames.chestloot.labelFrame.text:SetText(MythicChestTimers.L["Rewards"] .. ": |cFFAAAAAA2x|cFF00FF00" .. LOOT_ILVL[dungeonLevel+2] .. "+|cFFAAAAAA, 4x|cFF00FF00" .. LOOT_ILVL[dungeonLevel+1] .. "+");
+        if LOOT_ILVL[dungeonLevel+2] then
+            lootLevel = LOOT_ILVL[dungeonLevel+2]
+        elseif LOOT_ILVL[dungeonLevel+1] then
+            lootLevel = LOOT_ILVL[dungeonLevel+1]
         else
-            MythicChestTimersCMTimer.frames.chestloot.labelFrame.text:SetText(MythicChestTimers.L["Rewards"] .. ": |cFFAAAAAA2x|cFF00FF00" .. LOOT_ILVL[dungeonLevel+2] .. "+|cFFAAAAAA, 2x|cFF00FF00" .. LOOT_ILVL[dungeonLevel+1] .. "+|cFFAAAAAA, 2x|cFF00FF00" .. LOOT_ILVL[dungeonLevel] .. "+");
+            lootLevel = LOOT_ILVL[dungeonLevel]
         end
+        MythicChestTimersCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF"..MythicChestTimers.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
     elseif timeLeft2 > 0 then
         MythicChestTimersCMTimer.frames.chesttimer.labelFrame.text:SetText("2 "..MythicChestTimers.L["Chests"]..": "..MythicChestTimersCMTimer:FormatSeconds(timeLeft2));
         MythicChestTimersCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
         MythicChestTimersCMTimer.frames.chestloot.labelFrame:Show();
-        if LOOT_ILVL[dungeonLevel+1] == LOOT_ILVL[dungeonLevel] or not LOOT_ILVL[dungeonLevel+1] then
-            MythicChestTimersCMTimer.frames.chestloot.labelFrame.text:SetText(MythicChestTimers.L["Rewards"] .. ": |cFFAAAAAA4x|cFF00FF00" .. LOOT_ILVL[dungeonLevel+1] .. "+");
+        if LOOT_ILVL[dungeonLevel+1] then
+            lootLevel = LOOT_ILVL[dungeonLevel+1]
         else
-            MythicChestTimersCMTimer.frames.chestloot.labelFrame.text:SetText(MythicChestTimers.L["Rewards"] .. ": |cFFAAAAAA2x|cFF00FF00" .. LOOT_ILVL[dungeonLevel+1] .. "+|cFFAAAAAA, 2x|cFF00FF00" .. LOOT_ILVL[dungeonLevel] .. "+");
+            lootLevel = LOOT_ILVL[dungeonLevel]
         end
+        MythicChestTimersCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF"..MythicChestTimers.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
     elseif timeLeft1 > 0 then
         MythicChestTimersCMTimer.frames.chesttimer.labelFrame.text:SetText(MythicChestTimers.L["NoChests"]);
         MythicChestTimersCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
         MythicChestTimersCMTimer.frames.chestloot.labelFrame:Show();
-        MythicChestTimersCMTimer.frames.chestloot.labelFrame.text:SetText(MythicChestTimers.L["Rewards"] .. ": |cFFAAAAAA2x|cFF00FF00" .. LOOT_ILVL[dungeonLevel] .. "+");
+        MythicChestTimersCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF"..MythicChestTimers.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
     else
         MythicChestTimersCMTimer.frames.chesttimer.labelFrame.text:SetText(MythicChestTimers.L["NoChests_KeyDepleted"]);
-        MythicChestTimersCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontDisable");
+        MythicChestTimersCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
         MythicChestTimersCMTimer.frames.chestloot.labelFrame:Show();
-        MythicChestTimersCMTimer.frames.chestloot.labelFrame.text:SetText(MythicChestTimers.L["Rewards"] .. ": |cFFAAAAAA2x|cFF00FF00" .. LOOT_ILVL[dungeonLevel] .. "+");
+        MythicChestTimersCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFAAAAAA"..MythicChestTimers.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
     end
 end
 

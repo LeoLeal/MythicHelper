@@ -4,7 +4,8 @@ if L == nil then
 end
 
 L["Chests"] = "Baús"
-L["NoChests"] = "Nenhum baú extra"
-L["NoChests_KeyDepleted"] = "Nenhum baú extra (Chave esgotada)"
+L["NoChests"] = "1 Baú"
+L["NoChests_KeyDepleted"] = "1 Baú - Esgotado"
 L["Rewards"] = "Recompensas"
 L["No_Loot"] = "Sem saque"
+L["Loot"] = "Saque"
