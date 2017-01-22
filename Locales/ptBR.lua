@@ -3,7 +3,6 @@ if L == nil then
     return
 end
 
-L["LevelSub"] = "Nível "
 L["Chests"] = "Baús"
 L["NoChests"] = "1 Baú"
 L["NoChests_KeyDepleted"] = "1 Baú - Esgotado"
