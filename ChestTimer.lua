@@ -161,7 +161,7 @@ function MythicChestTimersCMTimer:Draw()
 
     -- -- Chest Timers
     dungeonLevel = ScenarioChallengeModeBlock.Level:GetText();
-    dungeonLevel = dungeonLevel:gsub("Level ", "");
+    dungeonLevel = dungeonLevel:gsub(MythicChestTimers.L["LevelSub"], "");
     dungeonLevel = tonumber(dungeonLevel);
 
     if not MythicChestTimersCMTimer.frames.chesttimer then
