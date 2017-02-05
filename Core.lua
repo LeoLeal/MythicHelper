@@ -1,4 +1,4 @@
-MythicChestTimers = LibStub("AceAddon-3.0"):NewAddon("MythicChestTimers", "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0");
+MythicChestTimers = LibStub("AceAddon-3.0"):NewAddon("MythicChestTimers", "AceEvent-3.0", "AceTimer-3.0");
 
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicChestTimers:OnInitialize()
