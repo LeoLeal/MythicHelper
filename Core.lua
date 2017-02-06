@@ -20,6 +20,7 @@ function MythicChestTimers:OnInitialize()
     }
     
     MythicChestTimersCMTimer:Init();
+    --MythicChestTimersWeeklyBest:Init();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -59,6 +60,7 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicChestTimers:PLAYER_ENTERING_WORLD()
     MythicChestTimersCMTimer:ReStart();
+    --MythicChestTimersWeeklyBest:Start();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

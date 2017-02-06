@@ -1,6 +1,7 @@
 MythicChestTimersCMTimer = {}
 MYTHIC_CHEST_TIMERS_LOOT_HEIGHT = 18;
 MYTHIC_CHEST_TIMERS_LOOT_ILVL = {840,845,845,850,850,855,855,860,860,865,870,870,875,880,885};
+MYTHIC_CHEST_TIMERS_WEEKLY_ILVL = {0,850,855,860,865,865,870,870,875,880,880,885,890,895,900};
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicChestTimersCMTimer:Init()
 

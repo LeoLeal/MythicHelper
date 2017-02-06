@@ -13,3 +13,5 @@ Locales\Locales.xml
 
 Core.lua
 ChestTimer.lua
+KeystoneTooltip.lua
+WeeklyBest.lua
