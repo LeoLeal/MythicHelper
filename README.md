@@ -1,4 +1,4 @@
-# MythicChestTimers
+# MythicPlusHelper
 Adds a Chest Timer for Mythic+ Dungeons right below the Objective Tracker Main Timer.
 
 This is a Super Strip-Down version of MythicPlusTimer.
