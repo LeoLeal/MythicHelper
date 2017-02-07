@@ -1,30 +1,17 @@
-MythicChestTimers = LibStub("AceAddon-3.0"):NewAddon("MythicChestTimers", "AceEvent-3.0", "AceTimer-3.0");
-
+MythicPlusHelper = LibStub("AceAddon-3.0"):NewAddon("MythicPlusHelper", "AceEvent-3.0", "AceTimer-3.0");
+MYTHIC_CHEST_TIMERS_LOOT_ILVL = {840,845,845,850,850,855,855,860,860,865,870,870,875,880,885};
+MYTHIC_CHEST_TIMERS_WEEKLY_ILVL = {0,850,855,860,865,865,870,870,875,880,880,885,890,895,900};
 -- ---------------------------------------------------------------------------------------------------------------------
-function MythicChestTimers:OnInitialize()
-    if MythicChestTimersDB == nil then
-        MythicChestTimersDB = {}
-    end
+function MythicPlusHelper:OnInitialize()
+    MythicPlusHelper.L = LibStub("AceLocale-3.0"):GetLocale("MythicPlusHelper")
     
-    if not MythicChestTimersDB.currentRun then
-        MythicChestTimersDB.currentRun = {} 
-    end
-
-    MythicChestTimers.L = LibStub("AceLocale-3.0"):GetLocale("MythicChestTimers")
-
-    local options = {
-        name = "MythicChestTimers",
-        handler = MythicChestTimersDB,
-        type = "group",
-        args = {},
-    }
-    
-    MythicChestTimersCMTimer:Init();
-    --MythicChestTimersWeeklyBest:Init();
+    MythicPlusHelperCMTimer:Init();
+    MythicPlusHelperKeystoneTooltip:Init();
+    MythicPlusHelperWeeklyBest:Init();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
-function MythicChestTimers:OnEnable()
+function MythicPlusHelper:OnEnable()
     self:RegisterEvent("CHALLENGE_MODE_START");
     self:RegisterEvent("CHALLENGE_MODE_COMPLETED");
     self:RegisterEvent("CHALLENGE_MODE_RESET");
@@ -32,41 +19,40 @@ function MythicChestTimers:OnEnable()
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
-function MythicChestTimers:CHALLENGE_MODE_START()
-    MythicChestTimersCMTimer:OnStart();
+function MythicPlusHelper:CHALLENGE_MODE_START()
+    MythicPlusHelperCMTimer:OnStart();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
-function MythicChestTimers:StartCMTimer()
-    MythicChestTimers:CancelCMTimer()
-    MythicChestTimers.cmTimer = self:ScheduleRepeatingTimer("OnCMTimerTick", 1)
+function MythicPlusHelper:StartCMTimer()
+    MythicPlusHelper:CancelCMTimer()
+    MythicPlusHelper.cmTimer = self:ScheduleRepeatingTimer("OnCMTimerTick", 1)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
-function MythicChestTimers:CHALLENGE_MODE_COMPLETED()
-    MythicChestTimersCMTimer:OnComplete();
+function MythicPlusHelper:CHALLENGE_MODE_COMPLETED()
+    MythicPlusHelperCMTimer:OnComplete();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
-function MythicChestTimers:CHALLENGE_MODE_RESET()
-    MythicChestTimersCMTimer:OnReset();
+function MythicPlusHelper:CHALLENGE_MODE_RESET()
+    MythicPlusHelperCMTimer:OnReset();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
-function MythicChestTimers:OnCMTimerTick()
-    MythicChestTimersCMTimer:Draw();
+function MythicPlusHelper:OnCMTimerTick()
+    MythicPlusHelperCMTimer:Draw();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
-function MythicChestTimers:PLAYER_ENTERING_WORLD()
-    MythicChestTimersCMTimer:ReStart();
-    --MythicChestTimersWeeklyBest:Start();
+function MythicPlusHelper:PLAYER_ENTERING_WORLD()
+    MythicPlusHelperCMTimer:ReStart();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
-function MythicChestTimers:CancelCMTimer()
-    if MythicChestTimers.cmTimer then
-        self:CancelTimer(MythicChestTimers.cmTimer)
-        MythicChestTimers.cmTimer = nil
+function MythicPlusHelper:CancelCMTimer()
+    if MythicPlusHelper.cmTimer then
+        self:CancelTimer(MythicPlusHelper.cmTimer)
+        MythicPlusHelper.cmTimer = nil
     end
 end

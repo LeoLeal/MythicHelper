@@ -1,4 +1,6 @@
---TODO: TESTAR SE CHAVE TÄ ESGOTADA PRA ESCONDER ILEVEL.
+function table.pack(...)
+    return { n = select("#", ...); ... }
+end
 
 local function GetModifiers(_, itemID, _, _, _, _, _, _, _, _, _, upgradeID, _, _, instanceID, mythicLevel, ...)
 	local modifiers
@@ -6,7 +8,6 @@ local function GetModifiers(_, itemID, _, _, _, _, _, _, _, _, _, upgradeID, _, 
 		modifiers = {}
 		for i = 1, select('#', ...) do
 			local modifierID = tonumber((select(i, ...)))
-			--if not modifierID then break end
 			tinsert(modifiers, modifierID)
 		end
 		local numModifiers = #modifiers
@@ -31,12 +32,15 @@ local function DecorateTooltip(self)
 			end
 			if mythicLevel and mythicLevel > 0 then
 				-- print(link);
-				self:AddLine(format('\n|cffffcc00%s|r', format(MythicChestTimers.L["BaseLootLevel"], MYTHIC_CHEST_TIMERS_LOOT_ILVL[mythicLevel])), 0, 1, 0, true)
+				self:AddLine(format('\n|cffffcc00%s|r', format(MythicPlusHelper.L["BaseLootLevel"], MYTHIC_CHEST_TIMERS_LOOT_ILVL[mythicLevel])), 0, 1, 0, true)
 			end
 			self:Show()
 		end
 	end
 end
 
-ItemRefTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
-GameTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
+MythicPlusHelperKeystoneTooltip = {}
+function MythicPlusHelperKeystoneTooltip:Init()
+	ItemRefTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
+	GameTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
+end
