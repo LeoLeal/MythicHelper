@@ -33,7 +33,7 @@ function MythicPlusHelperWeeklyBest:Init()
                             numScreen = ChallengesModeWeeklyBest.Child.Level:GetText();             
                             
                             self.time = self.time+1;
-                            if MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[tonumber(numScreen)] > 0 then
+                            if MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[tonumber(numScreen)] and MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[tonumber(numScreen)] > 0 then
                                 self.text:SetText(format(MythicPlusHelper.L["WeeklyChestText"], MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[tonumber(numScreen)]));
                             else
                                 self.text:SetText(MythicPlusHelper.L["EmptyWeeklyChestText"]);
