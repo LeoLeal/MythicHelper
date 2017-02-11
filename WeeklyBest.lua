@@ -1,9 +1,9 @@
 local lineAdded = false
 local numScreen = ""
 local frame = CreateFrame("Frame");
-MythicPlusHelperWeeklyBest = {};
+MythicHelperWeeklyBest = {};
 
-function MythicPlusHelperWeeklyBest:Init()
+function MythicHelperWeeklyBest:Init()
     frame:RegisterEvent("ADDON_LOADED");
     frame:SetScript("OnEvent",function(self,event,...)  
         if (event == "ADDON_LOADED") then       
@@ -34,9 +34,9 @@ function MythicPlusHelperWeeklyBest:Init()
                             
                             self.time = self.time+1;
                             if MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[tonumber(numScreen)] and MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[tonumber(numScreen)] > 0 then
-                                self.text:SetText(format(MythicPlusHelper.L["WeeklyChestText"], MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[tonumber(numScreen)]));
+                                self.text:SetText(format(MythicHelper.L["WeeklyChestText"], MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[tonumber(numScreen)]));
                             else
-                                self.text:SetText(MythicPlusHelper.L["EmptyWeeklyChestText"]);
+                                self.text:SetText(MythicHelper.L["EmptyWeeklyChestText"]);
                             end
                             self:SetScript("OnUpdate",nil);
                         end                 

@@ -1,8 +1,8 @@
 ## Interface: 70100
-## Version: 1.1.1
-## Title: MythicPlusHelper
+## Version: 1.2.0
+## Title: Mythic Helper
 ## Author: LeoLeal@Azralon
-## Notes: Adds extra info for Mythic+ Dungeons
+## Notes: Adds extra info for Mythic Dungeons
 ## OptionalDeps: Ace3
 ## X-Embeds: Ace3
 

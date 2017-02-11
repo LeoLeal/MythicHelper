@@ -32,15 +32,15 @@ local function DecorateTooltip(self)
 			end
 			if mythicLevel and mythicLevel > 0 then
 				-- print(link);
-				self:AddLine(format('\n|cffffcc00%s|r', format(MythicPlusHelper.L["BaseLootLevel"], MYTHIC_CHEST_TIMERS_LOOT_ILVL[mythicLevel])), 0, 1, 0, true)
+				self:AddLine(format('\n|cffffcc00%s|r', format(MythicHelper.L["BaseLootLevel"], MYTHIC_CHEST_TIMERS_LOOT_ILVL[mythicLevel])), 0, 1, 0, true)
 			end
 			self:Show()
 		end
 	end
 end
 
-MythicPlusHelperKeystoneTooltip = {}
-function MythicPlusHelperKeystoneTooltip:Init()
+MythicHelperKeystoneTooltip = {}
+function MythicHelperKeystoneTooltip:Init()
 	ItemRefTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
 	GameTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
 end
