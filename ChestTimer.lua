@@ -31,9 +31,6 @@ function MythicHelperCMTimer:Init()
     MythicHelperCMTimer.lootFrame:SetWidth(200);
     MythicHelperCMTimer.lootFrame:SetHeight(MYTHIC_CHEST_TIMERS_LOOT_HEIGHT);
 
-    MythicHelperCMTimer.eventFrame = CreateFrame("Frame")
-    MythicHelperCMTimer.eventFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -168,6 +165,9 @@ function MythicHelperCMTimer:Draw()
         }
     end
 
+    if cmLevel > 15 then
+        cmLevel = 15;
+    end
     local lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel];
     if ScenarioChallengeModeBlock.wasDepleted then
         MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(MythicHelper.L["No_Loot"]);

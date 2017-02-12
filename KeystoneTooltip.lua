@@ -24,6 +24,9 @@ local function DecorateTooltip(self)
 		local modifiers, upgradeID, instanceID, mythicLevel = GetModifiers(strsplit(':', link))
 		if modifiers then
 			mythicLevel = tonumber(mythicLevel);
+			if mythicLevel > 15 then
+				mythicLevel = 15;
+			end
 			for _, modifierID in ipairs(modifiers) do
 				local modifierName, modifierDescription = C_ChallengeMode.GetAffixInfo(modifierID)
 				if modifierName and modifierDescription then
