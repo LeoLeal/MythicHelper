@@ -2,6 +2,7 @@ local L = LibStub("AceLocale-3.0"):NewLocale("MythicHelper", "enUS", true)
 if L == nil then
     return
 end
+L["FONT"] = "Fonts\\FRIZQT__.TTF"
 
 L["Chests"] = "Chests"
 L["NoChests"] = "1 Chest"

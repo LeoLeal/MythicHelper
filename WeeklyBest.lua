@@ -13,7 +13,7 @@ function MythicHelperWeeklyBest:Init()
 
         iLvlFrm.text = iLvlFrm:CreateFontString(nil, "MEDIUM", "GameFontHighlightLarge");
         iLvlFrm.text:SetAllPoints(iLvlFrm);
-        iLvlFrm.text:SetFont("Fonts\\FRIZQT__.TTF",13);
+        iLvlFrm.text:SetFont(MythicHelper.L["FONT"],13);
         iLvlFrm.text:SetPoint("CENTER",0,0);
         iLvlFrm.text:SetTextColor(1,1,1,1);
     end
