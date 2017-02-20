@@ -1,5 +1,8 @@
 MythicHelperCMTimer = {}
 MYTHIC_CHEST_TIMERS_LOOT_HEIGHT = 18;
+globalCmLevel = 0;
+globalNumberChests = 0;
+globalDifficulty = 0;
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicHelperCMTimer:Init()
 
@@ -12,6 +15,11 @@ function MythicHelperCMTimer:Init()
     LootPosition.right = -29;
     LootPosition.top = -59;
     LootPosition.relativePoint = "TOPRIGHT";
+
+    VictoryPosition = {};
+    VictoryPosition.left = 0;
+    VictoryPosition.top = -59;
+    VictoryPosition.relativePoint = "TOP";
 
     MythicHelperCMTimer.isCompleted = false;
     MythicHelperCMTimer.started = false;
@@ -31,6 +39,12 @@ function MythicHelperCMTimer:Init()
     MythicHelperCMTimer.lootFrame:SetWidth(200);
     MythicHelperCMTimer.lootFrame:SetHeight(MYTHIC_CHEST_TIMERS_LOOT_HEIGHT);
 
+    MythicHelperCMTimer.victoryFrame = CreateFrame("Frame", "VictoryFrame", ChallengeModeCompleteBanner);
+    MythicHelperCMTimer.victoryFrame:SetPoint(VictoryPosition.relativePoint,VictoryPosition.left,VictoryPosition.top);
+    MythicHelperCMTimer.victoryFrame:EnableMouse(false);
+    MythicHelperCMTimer.victoryFrame:SetWidth(200);
+    MythicHelperCMTimer.victoryFrame:SetHeight(40);
+
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -38,6 +52,33 @@ function MythicHelperCMTimer:OnComplete()
     MythicHelperCMTimer.isCompleted = true;
     MythicHelperCMTimer.frame:Hide();
     MythicHelperCMTimer.lootFrame:Hide();
+    ChallengeModeCompleteBanner:HookScript("OnShow", MythicHelperCMTimer:DrawVictory(self));
+    ChallengeModeCompleteBanner:HookScript("OnHide", MythicHelperCMTimer:HideVictory(self));
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function MythicHelperCMTimer:HideVictory(self)
+    MythicHelperCMTimer.victoryFrame:Hide();
+end
+
+function MythicHelperCMTimer:DrawVictory(self)
+    if globalDifficulty == 8 then
+        MythicHelperCMTimer.victoryFrame:Show();
+        if not MythicHelperCMTimer.frames.victory.labelFrame then
+            local label = CreateFrame("Frame", nil, MythicHelperCMTimer.victoryFrame);
+            label:SetAllPoints()
+            label.text = label:CreateFontString(nil, "BACKGROUND", "GameFontHighlight");
+            label.text:SetPoint("TOPRIGHT", 0,0);
+            label.text:SetJustifyH("RIGHT");
+            label.text:SetFontObject("GameFontHighlight");
+
+            MythicHelperCMTimer.frames.victory = {
+                labelFrame = label
+            }
+        end
+        MythicHelperCMTimer.frames.victory.labelFrame.text:SetText("|cFFFFFFFF"..globalCmLevel.." |cFF00FF00" .. globalNumberChests);
+    end
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -81,6 +122,7 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicHelperCMTimer:Draw()
     local _, _, difficulty, _, _, _, _, currentZoneID = GetInstanceInfo();
+    globalDifficulty = difficulty
     if difficulty ~= 8 then
         MythicHelperCMTimer.frame:Hide();
         MythicHelperCMTimer.lootFrame:Hide();
@@ -119,6 +161,8 @@ function MythicHelperCMTimer:Draw()
     
     local cmLevel, _, _ = C_ChallengeMode.GetActiveKeystoneInfo();
     local _, _, maxTime = C_ChallengeMode.GetMapInfo(currentZoneID);
+
+    globalCmLevel = cmLevel;
     
     -- Chest Timer
     local threeChestTime = maxTime * 0.6;
@@ -185,6 +229,7 @@ function MythicHelperCMTimer:Draw()
             lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel]
         end
         MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF"..MythicHelper.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
+        globalNumberChests = 3;
     elseif timeLeft2 > 0 then
         MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText("2 "..MythicHelper.L["Chests"]..": "..MythicHelperCMTimer:FormatSeconds(timeLeft2));
         MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
@@ -195,6 +240,7 @@ function MythicHelperCMTimer:Draw()
             lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel]
         end
         MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF"..MythicHelper.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
+        globalNumberChests = 2;
     elseif timeLeft1 > 0 then
         MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(MythicHelper.L["NoChests"]);
         MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
@@ -205,6 +251,7 @@ function MythicHelperCMTimer:Draw()
         MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
         MythicHelperCMTimer.frames.chestloot.labelFrame:Show();
         MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFAAAAAA"..MythicHelper.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
+        globalNumberChests = 1;
     end
 end
 

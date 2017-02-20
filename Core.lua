@@ -33,7 +33,6 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicHelper:CHALLENGE_MODE_COMPLETED()
     MythicHelperCMTimer:OnComplete();
-    print(ChallengeModeCompleteBanner); -- TEST VARIABLE TO BANNER
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
