@@ -1,6 +1,6 @@
 MythicHelper = LibStub("AceAddon-3.0"):NewAddon("MythicHelper", "AceEvent-3.0", "AceTimer-3.0");
-MYTHIC_CHEST_TIMERS_LOOT_ILVL = {840,845,845,850,850,855,855,860,860,865,870,870,875,880,885};
-MYTHIC_CHEST_TIMERS_WEEKLY_ILVL = {0,850,855,860,865,865,870,870,875,880,880,885,890,895,900};
+MYTHIC_CHEST_TIMERS_LOOT_ILVL = {865,870,870,875,875,880,880,885,885,890,890,890,890,890,890};
+MYTHIC_CHEST_TIMERS_WEEKLY_ILVL = {0,875,880,885,890,890,895,895,900,905,905,905,905,905,905};
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicHelper:OnInitialize()
     MythicHelper.L = LibStub("AceLocale-3.0"):GetLocale("MythicHelper")
