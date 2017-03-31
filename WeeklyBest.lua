@@ -7,13 +7,13 @@ local iLvlFrm = nil;
 function MythicHelperWeeklyBest:Init()
     if ChallengesModeWeeklyBest and iLvlFrm == nil then
         iLvlFrm = CreateFrame("Frame","WeeklyBestILevel",ChallengesModeWeeklyBest);
-        iLvlFrm:SetWidth(160);
+        iLvlFrm:SetWidth(150);
         iLvlFrm:SetHeight(150);
-        iLvlFrm:SetPoint("CENTER",-128,-67); 
+        iLvlFrm:SetPoint("CENTER",-128,-47); 
 
         iLvlFrm.text = iLvlFrm:CreateFontString(nil, "MEDIUM", "GameFontHighlightLarge");
         iLvlFrm.text:SetAllPoints(iLvlFrm);
-        iLvlFrm.text:SetFont(MythicHelper.L["FONT"],13);
+        iLvlFrm.text:SetFont(MythicHelper.L["FONT"],11);
         iLvlFrm.text:SetPoint("CENTER",0,0);
         iLvlFrm.text:SetTextColor(1,1,1,1);
     end

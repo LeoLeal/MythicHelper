@@ -62,7 +62,6 @@ end
 function MythicHelperCMTimer:ReStart()
     local _, _, difficulty, _, _, _, _, _ = GetInstanceInfo();
     local _, timeCM = GetWorldElapsedTime(1);
-    
     if difficulty == 8 and timeCM > 0 then
         MythicHelperCMTimer.started = true;
         MythicHelper:StartCMTimer()
@@ -118,7 +117,8 @@ function MythicHelperCMTimer:Draw()
     end
     
     local cmLevel, _, _ = C_ChallengeMode.GetActiveKeystoneInfo();
-    local _, _, maxTime = C_ChallengeMode.GetMapInfo(currentZoneID);
+    local currentMapId = C_ChallengeMode.GetActiveChallengeMapID();
+    local _, _, maxTime = C_ChallengeMode.GetMapInfo(currentMapId);
     
     -- Chest Timer
     local threeChestTime = maxTime * 0.6;
