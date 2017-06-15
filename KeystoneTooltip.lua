@@ -1,6 +1,6 @@
 local function GetModifiers(linkType, ...)
 	if type(linkType) ~= 'string' then return end
-	local modifierOffset = 4
+	local modifierOffset = 3
 	local instanceID, mythicLevel, notDepleted, _ = ... -- "keystone" links
 	if mythicLevel and mythicLevel ~= "" then
 		mythicLevel = tonumber(mythicLevel);
