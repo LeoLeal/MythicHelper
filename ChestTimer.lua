@@ -164,48 +164,74 @@ function MythicHelperCMTimer:Draw()
             labelFrame = label
         }
     end
+    
+    -- OLD SYSTEM
+    -- if cmLevel > 15 then
+    --     cmLevel = 15;
+    -- end
 
-    if cmLevel > 15 then
-        cmLevel = 15;
-    end
     local lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel];
-    if ScenarioChallengeModeBlock.wasDepleted then
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(MythicHelper.L["No_Loot"]);
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontDisable");
-        MythicHelperCMTimer.frames.chestloot.labelFrame:Hide();
-    elseif timeLeft3 > 0 then
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText("3 "..MythicHelper.L["Chests"]..": "..MythicHelperCMTimer:FormatSeconds(timeLeft3));
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
-        MythicHelperCMTimer.frames.chestloot.labelFrame:Show();
-        if MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel+2] then
-            lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel+2]
-        elseif MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel+1] then
-            lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel+1]
-        else
-            lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel]
-        end
-        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF"..MythicHelper.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
-    elseif timeLeft2 > 0 then
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText("2 "..MythicHelper.L["Chests"]..": "..MythicHelperCMTimer:FormatSeconds(timeLeft2));
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
-        MythicHelperCMTimer.frames.chestloot.labelFrame:Show();
-        if MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel+1] then
-            lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel+1]
-        else
-            lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel]
-        end
-        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF"..MythicHelper.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
-    elseif timeLeft1 > 0 then
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(MythicHelper.L["NoChests"]);
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
-        MythicHelperCMTimer.frames.chestloot.labelFrame:Show();
-        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF"..MythicHelper.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
-    else
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(MythicHelper.L["NoChests_KeyDepleted"]);
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
-        MythicHelperCMTimer.frames.chestloot.labelFrame:Show();
-        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFAAAAAA"..MythicHelper.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
+
+    -- NEW SYSTEM 7.2.5
+    --MythicHelperCMTimer.frames.chestloot.labelFrame:Show();
+    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF 3x|cFF00FF00" .. lootLevel .. "+");
+    if cmLevel > 19 then
+        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF 4x|cFF00FF00" .. lootLevel .. "+");
     end
+
+    if timeLeft3 > 0 then
+        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText("+3 "..MythicHelper.L["Keystone_Level"]..": "..MythicHelperCMTimer:FormatSeconds(timeLeft3));
+        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
+    elseif timeLeft2 > 0 then
+        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText("+2 "..MythicHelper.L["Keystone_Level"]..": "..MythicHelperCMTimer:FormatSeconds(timeLeft2));
+        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
+    elseif timeLeft1 > 0 then
+        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText("+1 "..MythicHelper.L["Keystone_Level"]..": "..MythicHelperCMTimer:FormatSeconds(timeLeft2));
+        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
+    else
+        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText("-1 "..MythicHelper.L["Keystone_Level"]);
+        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
+        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF 2x|cFF00FF00" .. lootLevel .. "+");
+    end
+
+    -- OLD SYSTEM
+    -- if ScenarioChallengeModeBlock.wasDepleted then
+    --     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(MythicHelper.L["No_Loot"]);
+    --     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontDisable");
+    --     MythicHelperCMTimer.frames.chestloot.labelFrame:Hide();
+    -- elseif timeLeft3 > 0 then
+    --     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText("3 "..MythicHelper.L["Chests"]..": "..MythicHelperCMTimer:FormatSeconds(timeLeft3));
+    --     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
+    --     MythicHelperCMTimer.frames.chestloot.labelFrame:Show();
+    --     if MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel+2] then
+    --         lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel+2]
+    --     elseif MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel+1] then
+    --         lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel+1]
+    --     else
+    --         lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel]
+    --     end
+    --     MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF"..MythicHelper.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
+    -- elseif timeLeft2 > 0 then
+    --     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText("2 "..MythicHelper.L["Chests"]..": "..MythicHelperCMTimer:FormatSeconds(timeLeft2));
+    --     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
+    --     MythicHelperCMTimer.frames.chestloot.labelFrame:Show();
+    --     if MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel+1] then
+    --         lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel+1]
+    --     else
+    --         lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel]
+    --     end
+    --     MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF"..MythicHelper.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
+    -- elseif timeLeft1 > 0 then
+    --     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(MythicHelper.L["NoChests"]);
+    --     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
+    --     MythicHelperCMTimer.frames.chestloot.labelFrame:Show();
+    --     MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF"..MythicHelper.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
+    -- else
+    --     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(MythicHelper.L["NoChests_KeyDepleted"]);
+    --     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
+    --     MythicHelperCMTimer.frames.chestloot.labelFrame:Show();
+    --     MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFAAAAAA"..MythicHelper.L["Loot"].." |cFF00FF00" .. lootLevel .. "+");
+    -- end
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
