@@ -174,24 +174,24 @@ function MythicHelperCMTimer:Draw()
 
     -- NEW SYSTEM 7.2.5
     --MythicHelperCMTimer.frames.chestloot.labelFrame:Show();
-    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF 3x|cFF00FF00" .. lootLevel .. "+");
+    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF" .. MythicHelper.L["Loot"] .. ": 3x|cFF00FF00" .. lootLevel .. "+");
     if cmLevel > 19 then
-        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF 4x|cFF00FF00" .. lootLevel .. "+");
+        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF" .. MythicHelper.L["Loot"] .. ": 4x|cFF00FF00" .. lootLevel .. "+");
     end
 
     if timeLeft3 > 0 then
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText("+3 "..MythicHelper.L["Keystone_Level"]..": "..MythicHelperCMTimer:FormatSeconds(timeLeft3));
+        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(format(MythicHelper.L["Keystone_Level"], '+3')..": "..MythicHelperCMTimer:FormatSeconds(timeLeft3));
         MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
     elseif timeLeft2 > 0 then
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText("+2 "..MythicHelper.L["Keystone_Level"]..": "..MythicHelperCMTimer:FormatSeconds(timeLeft2));
+        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(format(MythicHelper.L["Keystone_Level"], '+2')..": "..MythicHelperCMTimer:FormatSeconds(timeLeft2));
         MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
     elseif timeLeft1 > 0 then
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText("+1 "..MythicHelper.L["Keystone_Level"]..": "..MythicHelperCMTimer:FormatSeconds(timeLeft2));
+        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(format(MythicHelper.L["Keystone_Level"], '+1'));
         MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
     else
-        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText("-1 "..MythicHelper.L["Keystone_Level"]);
+        MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(format(MythicHelper.L["Keystone_Level"], '|cffff0000-1'));
         MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
-        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF 2x|cFF00FF00" .. lootLevel .. "+");
+        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF" .. MythicHelper.L["Loot"] .. ": 2x|cFF00FF00" .. lootLevel .. "+");
     end
 
     -- OLD SYSTEM
