@@ -174,9 +174,10 @@ function MythicHelperCMTimer:Draw()
 
     -- NEW SYSTEM 7.2.5
     --MythicHelperCMTimer.frames.chestloot.labelFrame:Show();
-    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF" .. MythicHelper.L["Loot"] .. ": 3x|cFF00FF00" .. lootLevel .. "+");
-    if cmLevel > 19 then
-        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF" .. MythicHelper.L["Loot"] .. ": 4x|cFF00FF00" .. lootLevel .. "+");
+    if cmLevel < 20 then
+        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("3x|cFF00FF00" .. lootLevel .. "+");
+    else
+        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("5x|cFF00FF00" .. lootLevel .. "+");
     end
 
     if timeLeft3 > 0 then
@@ -191,7 +192,11 @@ function MythicHelperCMTimer:Draw()
     else
         MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(format(MythicHelper.L["Keystone_Level"], '|cffff0000-1'));
         MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
-        MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFFFFFFFF" .. MythicHelper.L["Loot"] .. ": 2x|cFF00FF00" .. lootLevel .. "+");
+        if cmLevel < 20 then
+            MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("2x|cFF00FF00" .. lootLevel .. "+");
+        else
+            MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("4x|cFF00FF00" .. lootLevel .. "+");
+        end
     end
 
     -- OLD SYSTEM

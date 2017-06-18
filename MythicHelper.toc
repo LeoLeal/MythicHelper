@@ -1,5 +1,5 @@
 ## Interface: 70200
-## Version: 1.3.2
+## Version: 1.3.3
 ## Title: Mythic Helper
 ## Author: LeoLeal@Azralon
 ## Notes: Adds extra info for Mythic Dungeons
