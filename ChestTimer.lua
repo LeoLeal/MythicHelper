@@ -170,7 +170,12 @@ function MythicHelperCMTimer:Draw()
     --     cmLevel = 15;
     -- end
 
-    local lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel];
+    local lootLevel = 0;
+    if cmLevel > 15 then
+        lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[15];
+    else
+        lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel];
+    end
 
     -- NEW SYSTEM 7.2.5
     --MythicHelperCMTimer.frames.chestloot.labelFrame:Show();
