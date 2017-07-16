@@ -2,6 +2,7 @@ local function GetModifiers(linkType, ...)
 	if type(linkType) ~= 'string' then return end
 	local modifierOffset = 3
 	local instanceID, mythicLevel, notDepleted, _ = ... -- "keystone" links
+
 	if mythicLevel and mythicLevel ~= "" then
 		mythicLevel = tonumber(mythicLevel);
 		if mythicLevel and mythicLevel > 15 then
@@ -15,6 +16,8 @@ local function GetModifiers(linkType, ...)
 		_, _, _, _, _, _, _, _, _, _, _, _, _, instanceID, mythicLevel = ...
 		if ... == '138019' then -- mythic keystone
 			modifierOffset = 16
+		else
+			return
 		end
 	elseif not linkType:find('keystone') then
 		return
@@ -22,9 +25,12 @@ local function GetModifiers(linkType, ...)
 
 	local modifiers = {}
 	for i = modifierOffset, select('#', ...) do
-		local modifierID = tonumber((select(i, ...)))
-		--if not modifierID then break end
-		tinsert(modifiers, modifierID)
+		local num = strmatch(select(i, ...) or '', '^(%d+)')
+		if num then
+			local modifierID = tonumber(num)
+			--if not modifierID then break end
+			tinsert(modifiers, modifierID)
+		end
 	end
 	local numModifiers = #modifiers
 	if modifiers[numModifiers] and modifiers[numModifiers] < 2 then
@@ -54,6 +60,8 @@ end
 
 MythicHelperKeystoneTooltip = {}
 function MythicHelperKeystoneTooltip:Init()
+	hooksecurefunc(ItemRefTooltip, 'SetHyperlink', DecorateTooltip) 
 	ItemRefTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
 	GameTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
 end
+
