@@ -2,16 +2,6 @@ local function GetModifiers(linkType, ...)
 	if type(linkType) ~= 'string' then return end
 	local modifierOffset = 3
 	local instanceID, mythicLevel, notDepleted, _ = ... -- "keystone" links
-
-	if mythicLevel and mythicLevel ~= "" then
-		mythicLevel = tonumber(mythicLevel);
-		if mythicLevel and mythicLevel > 15 then
-			mythicLevel = 15;
-		end
-	else
-		mythicLevel = nil;
-	end
-
 	if linkType:find('item') then -- only used for ItemRefTooltip currently
 		_, _, _, _, _, _, _, _, _, _, _, _, _, instanceID, mythicLevel = ...
 		if ... == '138019' then -- mythic keystone
@@ -21,6 +11,15 @@ local function GetModifiers(linkType, ...)
 		end
 	elseif not linkType:find('keystone') then
 		return
+	end
+
+	if mythicLevel and mythicLevel ~= "" then
+		mythicLevel = tonumber(mythicLevel);
+		if mythicLevel and mythicLevel > 15 then
+			mythicLevel = 15;
+		end
+	else
+		mythicLevel = nil;
 	end
 
 	local modifiers = {}
@@ -39,9 +38,11 @@ local function GetModifiers(linkType, ...)
 	return modifiers, instanceID, mythicLevel
 end
 
-local function DecorateTooltip(self)
-	local _, link = self:GetItem();
-	if type(link) == 'string' and link:find("keystone") then
+local function DecorateTooltip(self, link) -- 'SetHyperlink' has link in argument2.
+	if not link then
+		_, link = self:GetItem();
+	end
+	if type(link) == 'string' then
 		local modifiers, instanceID, mythicLevel = GetModifiers(strsplit(':', link))
 		if modifiers then
 			for _, modifierID in ipairs(modifiers) do
@@ -61,7 +62,6 @@ end
 MythicHelperKeystoneTooltip = {}
 function MythicHelperKeystoneTooltip:Init()
 	hooksecurefunc(ItemRefTooltip, 'SetHyperlink', DecorateTooltip) 
-	ItemRefTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
 	GameTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
 end
 
