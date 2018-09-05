@@ -1,12 +1,10 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("MythicHelper", "frFR");
 
-if L == nil then 
-	return 
-end 
+if L == nil then
+	return
+end
 
 L["FONT"] = "Fonts\\FRIZQT__.TTF"
 
-L["BaseLootLevel"] = "Récompense ilvl %d+." 
-L["WeeklyChestText"] = "La semaine prochaine vous recevrez un objet ilvl |cff00ff00%d|r+." 
-L["EmptyWeeklyChestText"] = "Faites des donjons Mythic+ pour avoir une récompense la semaine prochaine."
+L["BaseLootLevel"] = "Récompense ilvl %d+."
 L["Keystone_Level"] = "|cffffffffClé |cff00ff00%s|cffffffff"

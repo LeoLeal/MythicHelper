@@ -1,6 +1,6 @@
 local function GetModifiers(linkType, ...)
 	if type(linkType) ~= 'string' then return end
-	local modifierOffset = 3
+	local modifierOffset = 4
 	local instanceID, mythicLevel, notDepleted, _ = ... -- "keystone" links
 
 	if mythicLevel and mythicLevel ~= "" then
@@ -60,7 +60,7 @@ end
 
 MythicHelperKeystoneTooltip = {}
 function MythicHelperKeystoneTooltip:Init()
-	hooksecurefunc(ItemRefTooltip, 'SetHyperlink', DecorateTooltip) 
+	hooksecurefunc(ItemRefTooltip, 'SetHyperlink', DecorateTooltip)
 	ItemRefTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
 	GameTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
 end

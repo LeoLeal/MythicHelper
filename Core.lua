@@ -1,13 +1,12 @@
 MythicHelper = LibStub("AceAddon-3.0"):NewAddon("MythicHelper", "AceEvent-3.0", "AceTimer-3.0");
-MYTHIC_CHEST_TIMERS_LOOT_ILVL = {885,890,895,895,900,900,905,910,910,915,920,925,930,935,940};
-MYTHIC_CHEST_TIMERS_WEEKLY_ILVL = {0,910,910,915,915,920,925,925,930,935,940,945,950,955,960};
+MYTHIC_CHEST_TIMERS_LOOT_ILVL = {340,345,345,350,355,355,360,365,365,370,370,370,370,370,370};
+MYTHIC_CHEST_TIMERS_AZERITE_ILVL = {340,340,340,355,355,355,370,370,370,385,385,385,385,385,385};
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicHelper:OnInitialize()
     MythicHelper.L = LibStub("AceLocale-3.0"):GetLocale("MythicHelper")
 
     MythicHelperCMTimer:Init();
     MythicHelperKeystoneTooltip:Init();
-    MythicHelperWeeklyBest:Init();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -38,11 +37,6 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicHelper:CHALLENGE_MODE_RESET()
     MythicHelperCMTimer:OnReset();
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
-function MythicHelper:CHALLENGE_MODE_LEADERS_UPDATE()
-    MythicHelperWeeklyBest:Init();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

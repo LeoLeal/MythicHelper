@@ -45,7 +45,7 @@ function MythicHelperCMTimer:OnStart()
     MythicHelperCMTimer.isCompleted = false;
     MythicHelperCMTimer.started = true;
     MythicHelperCMTimer.reset = false;
-    
+
     MythicHelper:StartCMTimer()
 end
 
@@ -104,7 +104,7 @@ function MythicHelperCMTimer:Draw()
         return
     end
 
-    
+
     MythicHelperCMTimer.timerStarted = true
     local _, timeCM = GetWorldElapsedTime(1)
     if not timeCM or timeCM <= 0 then
@@ -115,11 +115,11 @@ function MythicHelperCMTimer:Draw()
         MythicHelperCMTimer.frame:Show();
         MythicHelperCMTimer.lootFrame:Show();
     end
-    
+
     local cmLevel, _, _ = C_ChallengeMode.GetActiveKeystoneInfo();
     local currentMapId = C_ChallengeMode.GetActiveChallengeMapID();
-    local _, _, maxTime = C_ChallengeMode.GetMapInfo(currentMapId);
-    
+    local _, _, maxTime = C_ChallengeMode.GetMapUIInfo(currentMapId);
+
     -- Chest Timer
     local threeChestTime = maxTime * 0.6;
     local twoChestTime = maxTime * 0.8;
@@ -164,7 +164,7 @@ function MythicHelperCMTimer:Draw()
             labelFrame = label
         }
     end
-    
+
     local lootLevel = 0;
     if cmLevel > 15 then
         lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[15];
@@ -212,11 +212,11 @@ function MythicHelperCMTimer:FormatSeconds(seconds)
     if min < 10 then
         min = "0" .. min
     end
-    
+
     if sec < 10 then
         sec = "0" .. sec
     end
-    
+
     return min .. ":" .. sec
 end
 
