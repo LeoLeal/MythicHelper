@@ -1,9 +1,9 @@
-local function GetModifiers(linkType, ...)
+function GetModifiers(linkType, ...)
 	if type(linkType) ~= 'string' then return end
 	local modifierOffset = 4
-	local instanceID, mythicLevel, notDepleted, _ = ... -- "keystone" links
+  local itemID, instanceID, mythicLevel, notDepleted, _ = ... -- "keystone" links
 
-	if mythicLevel and mythicLevel ~= "" then
+  if mythicLevel and mythicLevel ~= "" then
 		mythicLevel = tonumber(mythicLevel);
 		if mythicLevel and mythicLevel > 15 then
 			mythicLevel = 15;
@@ -12,7 +12,7 @@ local function GetModifiers(linkType, ...)
 		mythicLevel = nil;
 	end
 
-	if linkType:find('item') then -- only used for ItemRefTooltip currently
+  if linkType:find('item') then -- only used for ItemRefTooltip currently
 		_, _, _, _, _, _, _, _, _, _, _, _, _, instanceID, mythicLevel = ...
 		if ... == '138019' then -- mythic keystone
 			modifierOffset = 16
@@ -51,7 +51,7 @@ local function DecorateTooltip(self)
 				end
 			end
 			if type(mythicLevel) == "number" and mythicLevel > 0 then
-				self:AddLine(format('\n|cffffcc00%s|r', format(MythicHelper.L["BaseLootLevel"], MYTHIC_CHEST_TIMERS_LOOT_ILVL[mythicLevel])), 0, 1, 0, true)
+        self:AddLine(format('\n|cffffcc00%s|r', format(MythicHelper.L["BaseLootLevel"], MYTHIC_CHEST_TIMERS_LOOT_ILVL[mythicLevel])), 0, 1, 0, true)
 			end
 			self:Show()
 		end
