@@ -44,7 +44,6 @@ function MythicHelper:OnEnable()
   self:RegisterEvent("CHALLENGE_MODE_START");
   self:RegisterEvent("CHALLENGE_MODE_COMPLETED");
   self:RegisterEvent("CHALLENGE_MODE_RESET");
-  self:RegisterEvent("CHALLENGE_MODE_LEADERS_UPDATE");
   self:RegisterEvent("PLAYER_ENTERING_WORLD");
 end
 
