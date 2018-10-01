@@ -1,7 +1,7 @@
 MythicHelper = LibStub("AceAddon-3.0"):NewAddon("MythicHelper", "AceEvent-3.0", "AceTimer-3.0");
 MYTHIC_CHEST_TIMERS_LOOT_ILVL = {340,345,345,350,355,355,360,365,365,370,370,370,370,370,370};
-MYTHIC_CHEST_TIMERS_AZERITE_ILVL = {340,340,340,355,355,355,370,370,370,385,385,385,385,385,385};
 MYTHIC_CHEST_TIMERS_WEEKLY_ILVL = {0,355,355,360,360,365,370,370,375,380,380,380,380,380,380};
+MYTHIC_CHEST_TIMERS_AZERITE_ILVL = {0,340,340,355,355,355,370,370,370,385,385,385,385,385,385};
 
 MYTHIC_KEYSTONE_TEXT_TABLE = {};
 SLASH_MYTHIC1 = '/mythic'
@@ -36,13 +36,15 @@ end
 
 function FeedKeystoneTextTable()
   for i = 1, 15 do
-    levelPrefix = "Keystone Level ";
+    levelPrefix = "Keystone ";
     weeklyChestText = " | Weekly Chest - " .. MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[i] .. "+";
+    azeriteText = " | Azerite Armor - " .. MYTHIC_CHEST_TIMERS_AZERITE_ILVL[i];
 
     if i == 1 then
       levelText = "";
-      levelPrefix = "Base Mythic Level";
+      levelPrefix = "Base Mythic";
       weeklyChestText = "";
+      azeriteText = "";
     else
       levelText = i;
       if i < 10 then
@@ -55,16 +57,16 @@ function FeedKeystoneTextTable()
       levelColor = "|cFF999999";
     end
     if i > 3 then
-      levelColor = "|cFF00FF00";
+      levelColor = "|cFF1eff00";
     end
     if i > 6 then
-      levelColor = "|cFF3377FF";
+      levelColor = "|cFF0070dd";
     end
     if i > 9 then
-      levelColor = "|cFFCC00FF";
+      levelColor = "|cFFa335ee";
     end
 
-    MYTHIC_KEYSTONE_TEXT_TABLE[i] = "|cFFFFFF00[ " .. levelPrefix .. levelText .. " ] " .. levelColor .. "Dungeon Chest - " .. MYTHIC_CHEST_TIMERS_LOOT_ILVL[i] .. "+" .. weeklyChestText;
+    MYTHIC_KEYSTONE_TEXT_TABLE[i] = "|cFFFFFF00[ " .. levelPrefix .. levelText .. " ] " .. levelColor .. "Dungeon - " .. MYTHIC_CHEST_TIMERS_LOOT_ILVL[i] .. "+" .. weeklyChestText .. azeriteText;
   end
 end
 
