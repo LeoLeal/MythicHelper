@@ -3,71 +3,42 @@ MYTHIC_CHEST_TIMERS_LOOT_ILVL = {340,345,345,350,355,355,360,365,365,370,370,370
 MYTHIC_CHEST_TIMERS_WEEKLY_ILVL = {0,355,355,360,360,365,370,370,375,380,380,380,380,380,380};
 MYTHIC_CHEST_TIMERS_AZERITE_ILVL = {0,340,340,355,355,355,370,370,370,385,385,385,385,385,385};
 
-MYTHIC_KEYSTONE_TEXT_TABLE = {};
-SLASH_MYTHIC1 = '/mythic'
+-- 1: Overflowing
+-- 2: Skittish
+-- 3: Volcanic
+-- 4: Necrotic
+-- 5: Teeming
+-- 6: Raging
+-- 7: Bolstering
+-- 8: Sanguine
+-- 9: Tyrannical
+-- 10: Fortified
+-- 11: Bursting
+-- 12: Grievous
+-- 13: Explosive
+-- 14: Quaking
+AFFIXES_SCHEDULE = {
+	{ 10, 8, 4 },
+	{ 9, 11, 2 },
+	{ 10, 5, 14 },
+	{ 9, 6, 4 },
+	{ 10, 7, 2 },
+	{ 9, 5, 3 },
+	{ 10, 8, 12 },
+	{ 9, 7, 13 },
+	{ 10, 11, 14 },
+	{ 9, 6, 3 },
+	{ 10, 5, 13 },
+	{ 9, 7, 12 },
+}
 
-function SlashCmdList.MYTHIC(msg, editbox)
-  print("|cFFFFFFFF======================================================");
-  print("|cFFFFFFFF= Mythic Dungeon Chest rewards");
-  print("|cFFFFFFFF======================================================");
-
-  if tonumber(msg) == nil then
-    for i = 1, 15 do
-      print(MYTHIC_KEYSTONE_TEXT_TABLE[i]);
-    end
-  else
-    if MYTHIC_KEYSTONE_TEXT_TABLE[tonumber(msg)] == nil then
-      for i = 1, 15 do
-        print(MYTHIC_KEYSTONE_TEXT_TABLE[i]);
-      end
-    else
-      print(MYTHIC_KEYSTONE_TEXT_TABLE[tonumber(msg)]);
-    end
-  end
-end
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicHelper:OnInitialize()
   MythicHelper.L = LibStub("AceLocale-3.0"):GetLocale("MythicHelper")
 
   MythicHelperCMTimer:Init();
   MythicHelperKeystoneTooltip:Init();
-  FeedKeystoneTextTable();
-end
-
-function FeedKeystoneTextTable()
-  for i = 1, 15 do
-    levelPrefix = "Keystone ";
-    weeklyChestText = " | Weekly Chest - " .. MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[i] .. "+";
-    azeriteText = " | Azerite Armor - " .. MYTHIC_CHEST_TIMERS_AZERITE_ILVL[i];
-
-    if i == 1 then
-      levelText = "";
-      levelPrefix = "Base Mythic";
-      weeklyChestText = "";
-      azeriteText = "";
-    else
-      levelText = i;
-      if i < 10 then
-        levelText = "0"..i;
-      end
-    end
-
-    levelColor = "|cFFFFFFFF";
-    if i == 1 then
-      levelColor = "|cFF999999";
-    end
-    if i > 3 then
-      levelColor = "|cFF1eff00";
-    end
-    if i > 6 then
-      levelColor = "|cFF0070dd";
-    end
-    if i > 9 then
-      levelColor = "|cFFa335ee";
-    end
-
-    MYTHIC_KEYSTONE_TEXT_TABLE[i] = "|cFFFFFF00[ " .. levelPrefix .. levelText .. " ] " .. levelColor .. "Dungeon - " .. MYTHIC_CHEST_TIMERS_LOOT_ILVL[i] .. "+" .. weeklyChestText .. azeriteText;
-  end
+  MythicHelperSlashCommands:Init();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

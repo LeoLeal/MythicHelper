@@ -1,5 +1,5 @@
 ## Interface: 80000
-## Version: 2.0.6
+## Version: 2.1.0
 ## Title: Mythic Helper
 ## Author: LeoLeal@Azralon
 ## Notes: Adds extra info for Mythic Dungeons
@@ -13,3 +13,4 @@ Locales\Locales.xml
 Core.lua
 ChestTimer.lua
 KeystoneTooltip.lua
+SlashCommands.lua
