@@ -17,6 +17,22 @@ MYTHIC_CHEST_TIMERS_AZERITE_ILVL = {0,340,340,355,355,355,370,370,370,385,385,38
 -- 12: Grievous
 -- 13: Explosive
 -- 14: Quaking
+AFFIXES_DIFICULTY = {
+  '|cFFFF5555',
+  '|cFFFFB86C',
+  '|cFF50FA7B',
+  '|cFFFF5555',
+  '|cFFFFB86C',
+  '|cFFFFB86C',
+  '|cFFFFB86C',
+  '|cFF50FA7B',
+  '|cFFFF5555',
+  '|cFFFF5555',
+  '|cFFFFB86C',
+  '|cFFFFB86C',
+  '|cFFFFB86C',
+  '|cFF50FA7B'
+}
 AFFIXES_SCHEDULE = {
 	{ 10, 8, 4 },
 	{ 9, 11, 2 },

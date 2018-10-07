@@ -72,22 +72,6 @@ end
 -- Mythic Affixes Schedule Command
 SLASH_AFFIXES1 = '/affixes'
 local currentWeek
-local affixesDict = {
-  '|cFFFF5555Overflowin|cFFFFFFFF',
-  '|cFFFFB86CSkittish|cFFFFFFFF',
-  '|cFF50FA7BVolcanic|cFFFFFFFF',
-  '|cFFFF5555Necrotic|cFFFFFFFF',
-  '|cFFFFB86CTeeming|cFFFFFFFF',
-  '|cFFFFB86CRaging|cFFFFFFFF',
-  '|cFFFFB86CBolstering|cFFFFFFFF',
-  '|cFF50FA7BSanguine|cFFFFFFFF',
-  '|cFFFF5555Tyrannical|cFFFFFFFF',
-  '|cFFFF5555Fortified|cFFFFFFFF',
-  '|cFFFFB86CBursting|cFFFFFFFF',
-  '|cFFFFB86CGrievous|cFFFFFFFF',
-  '|cFFFFB86CExplosive|cFFFFFFFF',
-  '|cFF50FA7BQuaking|cFFFFFFFF'
-}
 
 function SlashCmdList.AFFIXES()
   print("|cFFFFFFFF======================================================");
@@ -110,7 +94,8 @@ function SlashCmdList.AFFIXES()
         affixString = '|c77888888[ In 2 Weeks ] => |cFFFFFFFF'
       end
 			for j = 1, #affixes do
-        affixString = affixString .. affixesDict[affixes[j]]
+        local modifierName, modifierDescription = C_ChallengeMode.GetAffixInfo(affixes[j])
+        affixString = affixString .. AFFIXES_DIFICULTY[affixes[j]] .. modifierName
         if j < 3 then
           affixString = affixString .. ', '
         end
