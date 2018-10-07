@@ -2,7 +2,11 @@ MythicHelperSlashCommands = {}
 
 function MythicHelperSlashCommands:Init()
   MythicHelperSlashCommands:FeedKeystoneTextTable();
-  MythicHelperSlashCommands:DiscoverCurrentMythicAffixes();
+  C_MythicPlus.RequestCurrentAffixes()
+  C_MythicPlus.RequestRewards()
+	C_Timer.After(3, function()
+    MythicHelperSlashCommands:DiscoverCurrentMythicAffixes();
+	end)
 end
 
 -- Mythic ILevel Prizes Command

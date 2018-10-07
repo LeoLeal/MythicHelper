@@ -38,7 +38,6 @@ function MythicHelper:OnInitialize()
 
   MythicHelperCMTimer:Init();
   MythicHelperKeystoneTooltip:Init();
-  MythicHelperSlashCommands:Init();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -78,6 +77,7 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicHelper:PLAYER_ENTERING_WORLD()
   MythicHelperCMTimer:ReStart();
+  MythicHelperSlashCommands:Init();
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
