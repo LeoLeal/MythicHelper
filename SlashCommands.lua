@@ -79,9 +79,12 @@ function SlashCmdList.AFFIXES()
   print("|cFFFFFFFF= |cFFAAAAAAAffix Dificulty: |cFF50FA7B[Easy] |cFFFFB86C[Medium] |cFFFF5555[Hard] ");
   print("|cFFFFFFFF======================================================");
 
-	if currentWeek then
+  if currentWeek then
 		for i = 1, 3 do
-			local scheduleWeek = (currentWeek - 1 + i) % (#AFFIXES_SCHEDULE)
+      local scheduleWeek = (currentWeek - 1 + i) % (#AFFIXES_SCHEDULE + 1);
+      if scheduleWeek == 0 then
+        scheduleWeek = 1;
+      end
       local affixes = AFFIXES_SCHEDULE[scheduleWeek]
       local affixString = ''
       if i == 1 then
