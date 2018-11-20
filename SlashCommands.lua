@@ -81,10 +81,12 @@ function SlashCmdList.AFFIXES()
 
   if currentWeek then
 		for i = 1, 3 do
-      local scheduleWeek = (currentWeek - 1 + i) % (#AFFIXES_SCHEDULE + 1);
+      local scheduleWeek = (currentWeek + i - 1) % (#AFFIXES_SCHEDULE);
+
       if scheduleWeek == 0 then
-        scheduleWeek = 1;
+        scheduleWeek = #AFFIXES_SCHEDULE;
       end
+
       local affixes = AFFIXES_SCHEDULE[scheduleWeek]
       local affixString = ''
       if i == 1 then
