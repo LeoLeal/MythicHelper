@@ -114,16 +114,16 @@ end
 
 function MythicHelperSlashCommands:DiscoverCurrentMythicAffixes()
   currentWeek = nil
-  local currentAffixes = C_MythicPlus.GetCurrentAffixes()
-
+  local currentAffixes = C_MythicPlus.GetCurrentAffixes();
   if currentAffixes then
     for index, affixes in ipairs(AFFIXES_SCHEDULE) do
       local matches = 0
       for _, affix in ipairs(currentAffixes) do
-        if affix == affixes[1] or affix == affixes[2] or affix == affixes[3] then
+        if affix.id == affixes[1] or affix.id == affixes[2] or affix.id == affixes[3] then
           matches = matches + 1
         end
       end
+
       if matches >= 3 then
         currentWeek = index
       end
