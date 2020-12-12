@@ -19,9 +19,9 @@ SLASH_MYTHIC1 = '/mythic'
 MYTHIC_KEYSTONE_TEXT_TABLE = {};
 
 function SlashCmdList.MYTHIC(msg, editbox)
-  print("|cFFFFFFFF======================================================");
+  print("|cFFFFFFFF=====================================");
   print("|cFFFFFFFF= Mythic Dungeon Chest rewards");
-  print("|cFFFFFFFF======================================================");
+  print("|cFFFFFFFF=====================================");
 
   if tonumber(msg) == nil then
     for i = 1, 15 do
@@ -79,12 +79,12 @@ local currentWeek
 function SlashCmdList.AFFIXES()
 
   local modifierName, _ = C_ChallengeMode.GetAffixInfo(121);
-  print("|cFFFFFFFF======================================================");
+  print("|cFFFFFFFF=====================================");
   print("|cFFFFFFFF= Mythic Keystone Dungeon Affixes Schedule");
   print("|cFFFFFFFF= |cFFAAAAAAAffix Dificulty: |cFF50FA7B[Easy] |cFFFFB86C[Medium] |cFFFF5555[Hard] ");
-  print("|cFFFFFFFF======================================================");
-  print("|cFFFFFFFF= Current Season Affix 10+ : " .. modifierName);
-  print("|cFFFFFFFF======================================================");
+  print("|cFFFFFFFF=====================================");
+  print("|cFFFFFFFF= Current Season Affix 10+ : |cFFFF5555" .. modifierName);
+  print("|cFFFFFFFF=====================================");
 
   if currentWeek then
 		for i = 1, 3 do
