@@ -1,16 +1,16 @@
 MythicHelperCMTimer = {}
-MYTHIC_CHEST_TIMERS_LOOT_HEIGHT = 20;
+MYTHIC_CHEST_TIMERS_LOOT_HEIGHT = 18;
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicHelperCMTimer:Init()
 
   TimersPosition = {};
   TimersPosition.left = 29;
-  TimersPosition.top = -62;
+  TimersPosition.top = -61;
   TimersPosition.relativePoint = "TOPLEFT";
 
   LootPosition = {};
   LootPosition.right = -29;
-  LootPosition.top = -62;
+  LootPosition.top = -61;
   LootPosition.relativePoint = "TOPRIGHT";
 
   MythicHelperCMTimer.isCompleted = false;
