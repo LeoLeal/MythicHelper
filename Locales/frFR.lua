@@ -6,5 +6,5 @@ end
 
 L["FONT"] = "Fonts\\FRIZQT__.TTF"
 
-L["BaseLootLevel"] = "Récompense ilvl %d+."
+L["BaseLootLevel"] = "Récompense ilvl %d."
 L["Keystone_Level"] = "|cffffffffClé |cff00ff00%s|cffffffff"

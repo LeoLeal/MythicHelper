@@ -6,5 +6,5 @@ end
 
 L["FONT"] = "Fonts\\FRIZQT___CYR.TTF"
 
-L["BaseLootLevel"] = "Вознаграждение как минимум %d уровня предмета."
+L["BaseLootLevel"] = "Награда предмета %d уровня."
 L["Keystone_Level"] = "|cff00ff00%s |cffffffffОсновные"

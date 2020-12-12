@@ -6,7 +6,12 @@ function MythicHelperSlashCommands:Init()
   C_MythicPlus.RequestRewards()
 	C_Timer.After(3, function()
     MythicHelperSlashCommands:DiscoverCurrentMythicAffixes();
-	end)
+  end)
+  print("|cFFFFFF00[Mythic Helper] Added |cFFFFFFFFAffix Descriptions |cFFFFFF00and |cFFFFFFFFLoot Level |cFFFFFF00to Keystone tooltips!");
+  print("|cFFFFFF00[Mythic Helper] Added |cFFFFFFFFKeystone upgrade timers |cFFFFFF00and |cFFFFFFFFLoot Quantity |cFFFFFF00to Dungeon Frames!");
+  print("|cFFFFFF00[Mythic Helper] Slash commands created!");
+  print("|cFFFFFFFFType |cFF00FFFF/mythic |cFFFFFFFFfor Mythic Keystone Loot tables");
+  print("|cFFFFFFFFType |cFF00FFFF/affixes |cFFFFFFFFfor Mythic Keysone Affixes schedule.");
 end
 
 -- Mythic ILevel Prizes Command
@@ -36,14 +41,12 @@ end
 function MythicHelperSlashCommands:FeedKeystoneTextTable()
   for i = 1, 15 do
     levelPrefix = "Keystone ";
-    weeklyChestText = " | Weekly Chest - " .. MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[i] .. "+";
-    azeriteText = " | Azerite Armor - " .. MYTHIC_CHEST_TIMERS_AZERITE_ILVL[i];
+    weeklyChestText = " | Weekly Chest - " .. MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[i];
 
     if i == 1 then
       levelText = "";
       levelPrefix = "Base Mythic";
       weeklyChestText = "";
-      azeriteText = "";
     else
       levelText = i;
       if i < 10 then
@@ -65,7 +68,7 @@ function MythicHelperSlashCommands:FeedKeystoneTextTable()
       levelColor = "|cFFa335ee";
     end
 
-    MYTHIC_KEYSTONE_TEXT_TABLE[i] = "|cFFFFFF00[ " .. levelPrefix .. levelText .. " ] " .. levelColor .. "Dungeon - " .. MYTHIC_CHEST_TIMERS_LOOT_ILVL[i] .. "+" .. weeklyChestText .. azeriteText;
+    MYTHIC_KEYSTONE_TEXT_TABLE[i] = "|cFFFFFF00[ " .. levelPrefix .. levelText .. " ] " .. levelColor .. "Dungeon - " .. MYTHIC_CHEST_TIMERS_LOOT_ILVL[i] .. weeklyChestText;
   end
 end
 
@@ -74,9 +77,13 @@ SLASH_AFFIXES1 = '/affixes'
 local currentWeek
 
 function SlashCmdList.AFFIXES()
+
+  local modifierName, _ = C_ChallengeMode.GetAffixInfo(121);
   print("|cFFFFFFFF======================================================");
-  print("|cFFFFFFFF= Mythic Dungeon Affixes Schedule");
+  print("|cFFFFFFFF= Mythic Keystone Dungeon Affixes Schedule");
   print("|cFFFFFFFF= |cFFAAAAAAAffix Dificulty: |cFF50FA7B[Easy] |cFFFFB86C[Medium] |cFFFF5555[Hard] ");
+  print("|cFFFFFFFF======================================================");
+  print("|cFFFFFFFF= Current Season Affix 10+ : " .. modifierName);
   print("|cFFFFFFFF======================================================");
 
   if currentWeek then

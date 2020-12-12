@@ -6,5 +6,5 @@ end
 
 L["FONT"] = "Fonts\\FRIZQT__.TTF"
 
-L["BaseLootLevel"] = "Reward of at least %d item level."
+L["BaseLootLevel"] = "Reward of %d item level."
 L["Keystone_Level"] = "|cff00ff00%s |cffffffffKeystone"
