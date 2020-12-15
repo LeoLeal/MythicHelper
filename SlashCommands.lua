@@ -107,7 +107,7 @@ function SlashCmdList.AFFIXES()
       end
 			for j = 1, #affixes do
         local modifierName, modifierDescription = C_ChallengeMode.GetAffixInfo(affixes[j])
-        affixString = affixString .. AFFIXES_DIFICULTY[affixes[j]] .. modifierName
+        affixString = affixString .. (affixes[j] and AFFIXES_DIFICULTY[(affixes[j] < 100 and affixes[j] or affixes[j] - 100)] or '|cFFFFFFFF') .. modifierName
         if j < 3 then
           affixString = affixString .. ', '
         end
