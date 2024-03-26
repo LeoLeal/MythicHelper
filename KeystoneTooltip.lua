@@ -44,6 +44,7 @@ function GetModifiers(linkType, ...)
 end
 
 local function DecorateTooltip(self)
+	if not self['GetItem'] then return end
 	local _, link = self:GetItem()
 	if type(link) == 'string' and link:find("Keystone") then
 		local modifiers, mythicLevel = GetModifiers(strsplit(':', link))

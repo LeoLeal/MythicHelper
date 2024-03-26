@@ -166,30 +166,13 @@ function MythicHelperCMTimer:Draw()
   end
 
   local lootLevel = 0;
-  if cmLevel > 15 then
-    lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[15];
+  if cmLevel > 20 then
+    lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[20];
   else
     lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel];
   end
 
-  if cmLevel > 19 then
-    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("100% 3x|cFF00FF00" .. lootLevel);
-  end
-  if cmLevel < 20 then
-    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("80% 3x|cFF00FF00" .. lootLevel);
-  end
-  if cmLevel < 19 then
-    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("60% 3x|cFF00FF00" .. lootLevel);
-  end
-  if cmLevel < 18 then
-    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("40% 3x|cFF00FF00" .. lootLevel);
-  end
-  if cmLevel < 17 then
-    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("20% 3x|cFF00FF00" .. lootLevel);
-  end
-  if cmLevel < 16 then
-    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("2x|cFF00FF00" .. lootLevel);
-  end
+  MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFF00FF00" .. lootLevel);
 
   if timeLeft3 > 0 then
     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(format(MythicHelper.L["Keystone_Level"], '+3')..": "..MythicHelperCMTimer:FormatSeconds(timeLeft3));
@@ -203,7 +186,7 @@ function MythicHelperCMTimer:Draw()
   else
     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(format(MythicHelper.L["Keystone_Level"], '|cffff0000-1'));
     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
-    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("1x|cFF00FF00" .. lootLevel);
+    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFF00FF00" .. lootLevel);
   end
 
 end
