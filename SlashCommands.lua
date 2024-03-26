@@ -24,12 +24,12 @@ function SlashCmdList.MYTHIC(msg, editbox)
   print("|cFFFFFFFF=====================================");
 
   if tonumber(msg) == nil then
-    for i = 1, 15 do
+    for i = 1, 20 do
       print(MYTHIC_KEYSTONE_TEXT_TABLE[i]);
     end
   else
     if MYTHIC_KEYSTONE_TEXT_TABLE[tonumber(msg)] == nil then
-      for i = 1, 15 do
+      for i = 1, 20 do
         print(MYTHIC_KEYSTONE_TEXT_TABLE[i]);
       end
     else
@@ -39,7 +39,7 @@ function SlashCmdList.MYTHIC(msg, editbox)
 end
 
 function MythicHelperSlashCommands:FeedKeystoneTextTable()
-  for i = 1, 15 do
+  for i = 1, 20 do
     levelPrefix = "Keystone ";
     weeklyChestText = " | Weekly Chest - " .. MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[i];
 
@@ -64,7 +64,7 @@ function MythicHelperSlashCommands:FeedKeystoneTextTable()
     if i > 6 then
       levelColor = "|cFF0070dd";
     end
-    if i > 9 then
+    if i > 13 then
       levelColor = "|cFFa335ee";
     end
 
@@ -78,13 +78,14 @@ local currentWeek
 
 function SlashCmdList.AFFIXES()
 
-  local modifierName, _ = C_ChallengeMode.GetAffixInfo(121);
+  -- local modifierName, _ = C_ChallengeMode.GetAffixInfo(SEASON_AFFIX);
   print("|cFFFFFFFF=====================================");
   print("|cFFFFFFFF= Mythic Keystone Dungeon Affixes Schedule");
+  print("|cFFFFFFFF= Affixes are introduced respectively at Dungeon levels |cFF1eff002|cFFFFFFFF, |cFF0070dd7 |cFFFFFFFFand |cFFa335ee14 |cFFFFFFFF");
   print("|cFFFFFFFF= |cFFAAAAAAAffix Dificulty: |cFF50FA7B[Easy] |cFFFFB86C[Medium] |cFFFF5555[Hard] ");
   print("|cFFFFFFFF=====================================");
-  print("|cFFFFFFFF= Current Season Affix 10+ : |cFFFF5555" .. modifierName);
-  print("|cFFFFFFFF=====================================");
+  -- print("|cFFFFFFFF= Current Season Affix 10+ : |cFFFF5555" .. modifierName);
+  -- print("|cFFFFFFFF=====================================");
 
   if currentWeek then
 		for i = 1, 3 do
@@ -105,9 +106,10 @@ function SlashCmdList.AFFIXES()
       if i == 3 then
         affixString = '|c77888888[ In 2 Weeks ] => |cFFFFFFFF'
       end
+
 			for j = 1, #affixes do
         local modifierName, modifierDescription = C_ChallengeMode.GetAffixInfo(affixes[j])
-        affixString = affixString .. (affixes[j] and AFFIXES_DIFICULTY[(affixes[j] < 100 and affixes[j] or affixes[j] - 100)] or '|cFFFFFFFF') .. modifierName
+        affixString = affixString .. (affixes[j] and AFFIXES_DIFICULTY[affixes[j]] or '|cFFFFFFFF') .. modifierName
         if j < 3 then
           affixString = affixString .. ', '
         end

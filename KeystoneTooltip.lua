@@ -1,21 +1,23 @@
 function GetModifiers(linkType, ...)
 	if type(linkType) ~= 'string' then return end
+
 	local modifierOffset = 4
-  local itemID, instanceID, mythicLevel, notDepleted, _ = ... -- "keystone" links
+  local _, _, mythicLevel, _, _ = ... -- "keystone" links
 
   if mythicLevel and mythicLevel ~= "" then
-		mythicLevel = tonumber(mythicLevel);
-		if mythicLevel and mythicLevel > 15 then
-			mythicLevel = 15;
+		mythicLevel = tonumber(mythicLevel)
+		if mythicLevel and mythicLevel > 20 then
+			mythicLevel = 20;
 		end
 	else
 		mythicLevel = nil;
 	end
 
   if linkType:find('item') then -- only used for ItemRefTooltip currently
-		_, _, _, _, _, _, _, _, _, _, _, _, _, instanceID, mythicLevel = ...
-		if ... == '138019' then -- mythic keystone
-			modifierOffset = 16
+		_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, mythicLevel = ...
+		mythicLevel = tonumber(mythicLevel)
+		if ... == '180653' then -- mythic keystone
+			modifierOffset = 20
 		else
 			return
 		end
@@ -32,17 +34,19 @@ function GetModifiers(linkType, ...)
 			tinsert(modifiers, modifierID)
 		end
 	end
+
 	local numModifiers = #modifiers
 	if modifiers[numModifiers] and modifiers[numModifiers] < 2 then
 		tremove(modifiers, numModifiers)
 	end
-	return modifiers, instanceID, mythicLevel
+
+	return modifiers, mythicLevel
 end
 
 local function DecorateTooltip(self)
-	local _, link = self:GetItem();
-	if type(link) == 'string' and link:find("keystone") then
-		local modifiers, instanceID, mythicLevel = GetModifiers(strsplit(':', link))
+	local _, link = self:GetItem()
+	if type(link) == 'string' and link:find("Keystone") then
+		local modifiers, mythicLevel = GetModifiers(strsplit(':', link))
 		if modifiers then
 			for _, modifierID in ipairs(modifiers) do
 				local modifierName, modifierDescription = C_ChallengeMode.GetAffixInfo(modifierID)
@@ -60,8 +64,6 @@ end
 
 MythicHelperKeystoneTooltip = {}
 function MythicHelperKeystoneTooltip:Init()
-	hooksecurefunc(ItemRefTooltip, 'SetHyperlink', DecorateTooltip)
-	ItemRefTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
-	GameTooltip:HookScript('OnTooltipSetItem', DecorateTooltip)
+	TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, DecorateTooltip)
 end
 
