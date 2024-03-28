@@ -1,5 +1,5 @@
 ## Interface: 100206
-## Version: 3.0.1
+## Version: 3.0.2
 ## Title: Mythic Helper
 ## Author: LeoLeal@Azralon
 ## Notes: Adds extra info for Mythic Dungeons
