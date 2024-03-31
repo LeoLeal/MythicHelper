@@ -186,7 +186,7 @@ function MythicHelperCMTimer:Draw()
   else
     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(format(MythicHelper.L["Keystone_Level"], '|cffff0000-1'));
     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
-    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFF00FF00" .. lootLevel);
+    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFF00FF00" .. lootLevel .. " ("..MythicHelper:GetGearTrack(lootLevel)..")");
   end
 
 end

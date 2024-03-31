@@ -58,6 +58,22 @@ AFFIXES_SCHEDULE = {
 
 -- SEASON_AFFIX = 125;
 
+function MythicHelper:GetGearTrack(itemLevel)
+  local itemTrack = MythicHelper.L["Gear_Track_Myth"]
+  
+  if itemLevel < 480 then
+    itemTrack = MythicHelper.L["Gear_Track_Hero"]
+  end
+  if itemLevel < 467 then
+    itemTrack = MythicHelper.L["Gear_Track_Champion"]
+  end
+  if itemLevel < 454 then
+    itemTrack = MythicHelper.L["Gear_Track_Veteran"]
+  end
+
+  return itemTrack
+end
+
 -- ---------------------------------------------------------------------------------------------------------------------
 function MythicHelper:OnInitialize()
   MythicHelper.L = LibStub("AceLocale-3.0"):GetLocale("MythicHelper")

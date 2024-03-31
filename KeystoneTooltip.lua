@@ -56,7 +56,7 @@ local function DecorateTooltip(self)
 				end
 			end
 			if type(mythicLevel) == "number" and mythicLevel > 0 then
-        self:AddLine(format('\n|cffffcc00%s|r', format(MythicHelper.L["BaseLootLevel"], MYTHIC_CHEST_TIMERS_LOOT_ILVL[mythicLevel])), 0, 1, 0, true)
+        self:AddLine(format('\n|cffffcc00%s|r', format(MythicHelper.L["BaseLootLevel"], MYTHIC_CHEST_TIMERS_LOOT_ILVL[mythicLevel], MythicHelper:GetGearTrack(MYTHIC_CHEST_TIMERS_LOOT_ILVL[mythicLevel]))), 0, 1, 0, true)
 			end
 			self:Show()
 		end
