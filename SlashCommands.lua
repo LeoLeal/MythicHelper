@@ -7,11 +7,11 @@ function MythicHelperSlashCommands:Init()
 	C_Timer.After(3, function()
     MythicHelperSlashCommands:DiscoverCurrentMythicAffixes();
   end)
-  print("|cFFFFFF00[Mythic Helper] Added |cFFFFFFFFAffix Descriptions |cFFFFFF00and |cFFFFFFFFLoot Level |cFFFFFF00to Keystone tooltips!");
-  print("|cFFFFFF00[Mythic Helper] Added |cFFFFFFFFKeystone upgrade timers |cFFFFFF00and |cFFFFFFFFLoot Quantity |cFFFFFF00to Dungeon Frames!");
-  print("|cFFFFFF00[Mythic Helper] Slash commands created!");
-  print("|cFFFFFFFFType |cFF00FFFF/mythic |cFFFFFFFFfor Mythic Keystone Loot tables");
-  print("|cFFFFFFFFType |cFF00FFFF/affixes |cFFFFFFFFfor Mythic Keysone Affixes schedule.");
+  print("|cFFFFFF00[Mythic Helper] "..MythicHelper.L["LOAD_1"]);
+  print("|cFFFFFF00[Mythic Helper] "..MythicHelper.L["LOAD_2"]);
+  print("|cFFFFFF00[Mythic Helper] "..MythicHelper.L["LOAD_3"]);
+  print("|cFFFFFFFFType |cFF00FFFF/mythic |cFFFFFFFF"..MythicHelper.L["LOAD_4"]);
+  print("|cFFFFFFFFType |cFF00FFFF/affixes |cFFFFFFFF"..MythicHelper.L["LOAD_5"]);
 end
 
 -- Mythic ILevel Prizes Command
@@ -40,12 +40,12 @@ end
 
 function MythicHelperSlashCommands:FeedKeystoneTextTable()
   for i = 1, 20 do
-    levelPrefix = "Keystone ";
-    weeklyChestText = " | Weekly Chest - " .. MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[i];
+    levelPrefix = MythicHelper.L["Keystone"].." ";
+    weeklyChestText = " | "..MythicHelper.L["Weekly_Chest"].." - " .. MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[i] .. " ("..MythicHelper:GetGearTrack(MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[i])..")";
 
     if i == 1 then
       levelText = "";
-      levelPrefix = "Base Mythic";
+      levelPrefix = MythicHelper.L["Base"];
       weeklyChestText = "";
     else
       levelText = i;
@@ -68,7 +68,7 @@ function MythicHelperSlashCommands:FeedKeystoneTextTable()
       levelColor = "|cFFa335ee";
     end
 
-    MYTHIC_KEYSTONE_TEXT_TABLE[i] = "|cFFFFFF00[ " .. levelPrefix .. levelText .. " ] " .. levelColor .. "Dungeon - " .. MYTHIC_CHEST_TIMERS_LOOT_ILVL[i] .. weeklyChestText;
+    MYTHIC_KEYSTONE_TEXT_TABLE[i] = "|cFFFFFF00[ " .. levelPrefix .. levelText .. " ] " .. levelColor .. MythicHelper.L["Dungeon"] .. " - " .. MYTHIC_CHEST_TIMERS_LOOT_ILVL[i] .. " ("..MythicHelper:GetGearTrack(MYTHIC_CHEST_TIMERS_LOOT_ILVL[i])..")" .. weeklyChestText;
   end
 end
 
@@ -98,13 +98,13 @@ function SlashCmdList.AFFIXES()
       local affixes = AFFIXES_SCHEDULE[scheduleWeek]
       local affixString = ''
       if i == 1 then
-        affixString = '|cFFFFFFFF[ This Week ] => |cFFFFFFFF'
+        affixString = '|cFFFFFFFF[ '.. MythicHelper.L["THIS_WEEK"] ..' ] => |cFFFFFFFF'
       end
       if i == 2 then
-        affixString = '|c77AAAAAA[ Next Week ] => |cFFFFFFFF'
+        affixString = '|c77AAAAAA[ '.. MythicHelper.L["NEXT_WEEK"] ..' ] => |cFFFFFFFF'
       end
       if i == 3 then
-        affixString = '|c77888888[ In 2 Weeks ] => |cFFFFFFFF'
+        affixString = '|c77888888[ '.. MythicHelper.L["IN_2_WEEKS"] ..' ] => |cFFFFFFFF'
       end
 
 			for j = 1, #affixes do
@@ -116,8 +116,6 @@ function SlashCmdList.AFFIXES()
       end
       print(affixString);
 		end
-	else
-    print("No Week Discovered yet.");
 	end
 end
 
