@@ -172,7 +172,7 @@ function MythicHelperCMTimer:Draw()
     lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel];
   end
 
-  MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFF00FF00" .. lootLevel);
+  MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFF00FF00" .. lootLevel .. " ("..MythicHelper:GetGearTrack(lootLevel)..")");
 
   if timeLeft3 > 0 then
     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(format(MythicHelper.L["Keystone_Level"], '+3')..": "..MythicHelperCMTimer:FormatSeconds(timeLeft3));
