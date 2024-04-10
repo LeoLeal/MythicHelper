@@ -9,9 +9,9 @@ function MythicHelperCMTimer:Init()
   TimersPosition.relativePoint = "TOPLEFT";
 
   LootPosition = {};
-  LootPosition.right = -29;
-  LootPosition.top = -61;
-  LootPosition.relativePoint = "TOPRIGHT";
+  LootPosition.right = -34;
+  LootPosition.top = 14;
+  LootPosition.relativePoint = "BOTTOMRIGHT";
 
   MythicHelperCMTimer.isCompleted = false;
   MythicHelperCMTimer.started = false;
@@ -30,6 +30,7 @@ function MythicHelperCMTimer:Init()
   MythicHelperCMTimer.lootFrame:EnableMouse(false);
   MythicHelperCMTimer.lootFrame:SetWidth(200);
   MythicHelperCMTimer.lootFrame:SetHeight(MYTHIC_CHEST_TIMERS_LOOT_HEIGHT);
+  MythicHelperCMTimer.lootFrame:SetScale(0.8);
 
 end
 
@@ -143,9 +144,9 @@ function MythicHelperCMTimer:Draw()
   -- loot frame
   if not MythicHelperCMTimer.frames.chestloot then
     local label = CreateFrame("Frame", nil, MythicHelperCMTimer.lootFrame);
-    label:SetAllPoints()
+    label:SetAllPoints();
     label.text = label:CreateFontString(nil, "BACKGROUND", "GameFontHighlight");
-    label.text:SetPoint("TOPRIGHT", 0,0);
+    label.text:SetPoint("TOPRIGHT", 0, 0);
     label.text:SetJustifyH("RIGHT");
     label.text:SetFontObject("GameFontHighlight");
 
@@ -171,7 +172,6 @@ function MythicHelperCMTimer:Draw()
   else
     lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel];
   end
-
   MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFF00FF00" .. lootLevel .. " ("..MythicHelper:GetGearTrack(lootLevel)..")");
 
   if timeLeft3 > 0 then
@@ -186,7 +186,6 @@ function MythicHelperCMTimer:Draw()
   else
     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetText(format(MythicHelper.L["Keystone_Level"], '|cffff0000-1'));
     MythicHelperCMTimer.frames.chesttimer.labelFrame.text:SetFontObject("GameFontHighlight");
-    MythicHelperCMTimer.frames.chestloot.labelFrame.text:SetText("|cFF00FF00" .. lootLevel .. " ("..MythicHelper:GetGearTrack(lootLevel)..")");
   end
 
 end
