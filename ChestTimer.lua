@@ -167,8 +167,8 @@ function MythicHelperCMTimer:Draw()
   end
 
   local lootLevel = 0;
-  if cmLevel > 20 then
-    lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[20];
+  if cmLevel > 10 then
+    lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[10];
   else
     lootLevel = MYTHIC_CHEST_TIMERS_LOOT_ILVL[cmLevel];
   end

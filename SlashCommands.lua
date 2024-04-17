@@ -39,7 +39,7 @@ function SlashCmdList.MYTHIC(msg, editbox)
 end
 
 function MythicHelperSlashCommands:FeedKeystoneTextTable()
-  for i = 1, 20 do
+  for i = 1, 10 do
     levelPrefix = MythicHelper.L["Keystone"].." ";
     weeklyChestText = " | "..MythicHelper.L["Weekly_Chest"].." - " .. MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[i] .. " ("..MythicHelper:GetGearTrack(MYTHIC_CHEST_TIMERS_WEEKLY_ILVL[i])..")";
 
@@ -58,13 +58,13 @@ function MythicHelperSlashCommands:FeedKeystoneTextTable()
     if i == 1 then
       levelColor = "|cFF999999";
     end
-    if i > 3 then
+    if i > 1 then
       levelColor = "|cFF1eff00";
     end
-    if i > 6 then
+    if i > 4 then
       levelColor = "|cFF0070dd";
     end
-    if i > 13 then
+    if i > 9 then
       levelColor = "|cFFa335ee";
     end
 
@@ -78,14 +78,11 @@ local currentWeek
 
 function SlashCmdList.AFFIXES()
 
-  -- local modifierName, _ = C_ChallengeMode.GetAffixInfo(SEASON_AFFIX);
   print("|cFFFFFFFF=====================================");
   print("|cFFFFFFFF= Mythic Keystone Dungeon Affixes Schedule");
-  print("|cFFFFFFFF= Affixes are introduced respectively at Dungeon levels |cFF1eff002|cFFFFFFFF, |cFF0070dd7 |cFFFFFFFFand |cFFa335ee14 |cFFFFFFFF");
+  print("|cFFFFFFFF= Affixes are introduced respectively at Dungeon levels |cFF1eff002|cFFFFFFFF, |cFF0070dd5 |cFFFFFFFFand |cFFa335ee10 |cFFFFFFFF");
   print("|cFFFFFFFF= |cFFAAAAAAAffix Dificulty: |cFF50FA7B[Easy] |cFFFFB86C[Medium] |cFFFF5555[Hard] ");
   print("|cFFFFFFFF=====================================");
-  -- print("|cFFFFFFFF= Current Season Affix 10+ : |cFFFF5555" .. modifierName);
-  -- print("|cFFFFFFFF=====================================");
 
   if currentWeek then
 		for i = 1, 3 do

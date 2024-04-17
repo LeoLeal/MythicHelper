@@ -6,8 +6,8 @@ function GetModifiers(linkType, ...)
 
   if mythicLevel and mythicLevel ~= "" then
 		mythicLevel = tonumber(mythicLevel)
-		if mythicLevel and mythicLevel > 20 then
-			mythicLevel = 20;
+		if mythicLevel and mythicLevel > 10 then
+			mythicLevel = 10;
 		end
 	else
 		mythicLevel = nil;
