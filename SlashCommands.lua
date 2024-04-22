@@ -46,7 +46,6 @@ function MythicHelperSlashCommands:FeedKeystoneTextTable()
     if i == 1 then
       levelText = "";
       levelPrefix = MythicHelper.L["Base"];
-      weeklyChestText = "";
     else
       levelText = i;
       if i < 10 then
