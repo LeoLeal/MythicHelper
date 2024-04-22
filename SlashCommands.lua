@@ -24,12 +24,12 @@ function SlashCmdList.MYTHIC(msg, editbox)
   print("|cFFFFFFFF=====================================");
 
   if tonumber(msg) == nil then
-    for i = 1, 20 do
+    for i = 1, 10 do
       print(MYTHIC_KEYSTONE_TEXT_TABLE[i]);
     end
   else
     if MYTHIC_KEYSTONE_TEXT_TABLE[tonumber(msg)] == nil then
-      for i = 1, 20 do
+      for i = 1, 10 do
         print(MYTHIC_KEYSTONE_TEXT_TABLE[i]);
       end
     else

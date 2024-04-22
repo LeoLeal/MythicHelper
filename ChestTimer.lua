@@ -5,8 +5,8 @@ function MythicHelperCMTimer:Init()
 
   TimersPosition = {};
   TimersPosition.left = 29;
-  TimersPosition.top = -61;
-  TimersPosition.relativePoint = "TOPLEFT";
+  TimersPosition.top = 10;
+  TimersPosition.relativePoint = "BOTTOMLEFT";
 
   LootPosition = {};
   LootPosition.right = -34;
@@ -24,6 +24,7 @@ function MythicHelperCMTimer:Init()
   MythicHelperCMTimer.frame:EnableMouse(false);
   MythicHelperCMTimer.frame:SetWidth(190);
   MythicHelperCMTimer.frame:SetHeight(MYTHIC_CHEST_TIMERS_LOOT_HEIGHT);
+  MythicHelperCMTimer.frame:SetScale(0.9);
 
   MythicHelperCMTimer.lootFrame = CreateFrame("Frame", "LootTimer", ScenarioChallengeModeBlock);
   MythicHelperCMTimer.lootFrame:SetPoint(LootPosition.relativePoint,LootPosition.right,LootPosition.top);
