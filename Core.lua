@@ -1,6 +1,6 @@
 MythicHelper = LibStub("AceAddon-3.0"):NewAddon("MythicHelper", "AceEvent-3.0", "AceTimer-3.0");
-MYTHIC_CHEST_TIMERS_LOOT_ILVL = {437,441,444,444,447,447,450,450,454,454,457,457,460,460,463,463,467,467,470,470};
-MYTHIC_CHEST_TIMERS_WEEKLY_ILVL = {0,454,457,460,460,463,463,467,467,470,470,473,473,473,476,476,476,480,480,483};
+MYTHIC_CHEST_TIMERS_LOOT_ILVL   = {493,496,499,499,502,502,506,506,509,509};
+MYTHIC_CHEST_TIMERS_WEEKLY_ILVL = {506,509,509,512,512,515,515,519,519,522};
 -- |cFF50FA7B[Easy] |cFFFFB86C[Medium] |cFFFF5555[Hard]
 AFFIXES_DIFICULTY = {
   '|cFFFF5555', -- 1: Overflowing
@@ -61,13 +61,13 @@ AFFIXES_SCHEDULE = {
 function MythicHelper:GetGearTrack(itemLevel)
   local itemTrack = MythicHelper.L["Gear_Track_Myth"]
   
-  if itemLevel < 480 then
+  if itemLevel < 519 then
     itemTrack = MythicHelper.L["Gear_Track_Hero"]
   end
-  if itemLevel < 467 then
+  if itemLevel < 506 then
     itemTrack = MythicHelper.L["Gear_Track_Champion"]
   end
-  if itemLevel < 454 then
+  if itemLevel < 493 then
     itemTrack = MythicHelper.L["Gear_Track_Veteran"]
   end
 
